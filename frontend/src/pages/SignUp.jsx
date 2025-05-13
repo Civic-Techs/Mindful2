@@ -10,6 +10,8 @@ export default function SignUpPage() {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [errorText, setErrorText] = useState('');
   const [email, setEmail] = useState('');
+  const [realname, setRealName] = useState('');
+  const [dob, setDOB] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,9 +23,9 @@ export default function SignUpPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErrorText('');
-    if (!email || !username || !password) return setErrorText('Missing username or password');
+    if (!email || !realname || !dob || !username || !password) return setErrorText('Missing username or password');
 
-    const [user, error] = await registerUser({ email, username, password });
+    const [user, error] = await registerUser({ email, realname, dob, username, password });
     if (error) return setErrorText(error.message);
 
     setCurrentUser(user);
@@ -32,7 +34,9 @@ export default function SignUpPage() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if (email === 'email') setEmail(value)
+    if (email === 'email') setEmail(value);
+    if (name === 'realname') setRealName(value);
+    if (name === 'dob') setDOB(value);
     if (name === 'username') setUsername(value);
     if (name === 'password') setPassword(value);
   };
@@ -43,6 +47,13 @@ export default function SignUpPage() {
       <h2 id="create-heading">Create New User</h2>
       <label htmlFor="email">Email</label>
       <input type="text" autoComplete="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+
+      <label htmlFor="realname">Name</label>
+      <input type="text" autoComplete="realname" id="realname" name="realname" value={realname} onChange={(e) => setRealName(e.target.value)} />
+
+      <label htmlFor="dob">Date of birth</label>
+      <input type="date" autoComplete="dob" id="dob" name="dob" value={dob} onChange={(e) => setDOB(e.target.value)} />
+
       <label htmlFor="username">Username</label>
       <input
         autoComplete="off"
@@ -71,6 +82,6 @@ export default function SignUpPage() {
       <button>Sign Up Now!</button>
     </form>
     {!!errorText && <p>{errorText}</p>}
-    <p>Already have an account with us? <Link to="/login">Log in!</Link></p>
+    <p>Already have an account with us? <Link to="/login">Log in</Link></p>
   </>;
 }
