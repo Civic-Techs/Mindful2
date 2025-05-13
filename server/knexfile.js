@@ -19,7 +19,7 @@ module.exports = {
       port: process.env.PG_PORT || 5432,
       user: process.env.PG_USER || 'postgres',
       password: process.env.PG_PASS || 'postgres',
-      database: process.env.PG_DB || 'postgres',
+      database: process.env.PG_DB || 'mindfulv2',
     },
     migrations: {
       directory: migrationsDirectory,
