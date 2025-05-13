@@ -9,6 +9,7 @@ export default function SignUpPage() {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [errorText, setErrorText] = useState('');
+  const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -22,7 +23,7 @@ export default function SignUpPage() {
     setErrorText('');
     if (!username || !password) return setErrorText('Missing username or password');
 
-    const [user, error] = await registerUser({ username, password });
+    const [user, error] = await registerUser({ email, username, password });
     if (error) return setErrorText(error.message);
 
     setCurrentUser(user);
@@ -31,6 +32,7 @@ export default function SignUpPage() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    if (email === 'email') setEmail(value)
     if (name === 'username') setUsername(value);
     if (name === 'password') setPassword(value);
   };
@@ -39,6 +41,8 @@ export default function SignUpPage() {
     <h1>Sign Up</h1>
     <form onSubmit={handleSubmit} onChange={handleChange} aria-labelledby="create-heading">
       <h2 id="create-heading">Create New User</h2>
+      <label htmlFor="email">Email</label>
+      <input type="text" autoComplete="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
       <label htmlFor="username">Username</label>
       <input
         autoComplete="off"
