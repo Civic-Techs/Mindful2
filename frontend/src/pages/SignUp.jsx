@@ -21,7 +21,7 @@ export default function SignUpPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErrorText('');
-    if (!username || !password) return setErrorText('Missing username or password');
+    if (!email || !username || !password) return setErrorText('Missing username or password');
 
     const [user, error] = await registerUser({ email, username, password });
     if (error) return setErrorText(error.message);
