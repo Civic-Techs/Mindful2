@@ -7,13 +7,13 @@ exports.registerUser = async (req, res) => {
   }
 
   // Body needs a username and password
-  const { email, username, password } = req.body;
-  if (!email || !username || !password) {
-    return res.status(400).send({ message: 'Email, username and password required' });
+  const { email, name, dob, username, password } = req.body;
+  if (!email || !name || !dob || !username || !password) {
+    return res.status(400).send({ message: 'Email, name, date of birth, username and password required' });
   }
 
   // User.create will handle hashing the password and storing in the database
-  const user = await User.create(email, username, password);
+  const user = await User.create(email, name, dob, username, password);
 
   // Add the user id to the cookie and send the user data back
   req.session.userId = user.id;
