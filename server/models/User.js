@@ -7,30 +7,54 @@ class User {
 
   // Create a User instance with the password hidden
   // Instances of User can be sent to clients without exposing the password
-  constructor({ id, username, password_hash }) {
+  constructor({
+    id,
+    name,
+    dob,
+    bio = '',
+    profile_img = '',
+    email,
+    username,
+    passwordHash,
+  }) {
     this.id = id;
+    this.name = name;
+    this.dob = dob;
+    this.email = email;
     this.username = username;
-    this.#passwordHash = password_hash;
+    this.#passwordHash = passwordHash;
+    this.bio = bio;
+    this.profile_img = profile_img;
   }
 
   // Controllers can use this instance method to validate passwords prior to sending responses
   isValidPassword = async (password) => {
-    return await bcrypt.compare(password, this.#passwordHash);
-  }
+    return bcrypt.compare(password, this.#passwordHash);
+  };
 
   // Hashes the given password and then creates a new user
   // in the users table. Returns the newly created user, using
-  // the constructor to hide the passwordHash. 
-  static async create(username, password) {
+  // the constructor to hide the passwordHash.
+  static async create(name, dob, bio, profile_img, email, username, password) {
     // hash the plain-text password using bcrypt before storing it in the database
     const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
 
-    const query = `INSERT INTO users (username, password_hash)
-      VALUES (?, ?) RETURNING *`;
-    const result = await knex.raw(query, [username, passwordHash]);
+    const query = `
+        INSERT INTO users (name, dob, bio, profile_img, email, username, password_hash)
+        VALUES(?, ?, ?, ?, ?, ?, ?)
+        RETURNING *
+    `;
+    const { rows } = await knex.raw(query, [
+      name,
+      dob,
+      bio,
+      profile_img,
+      email,
+      username,
+      passwordHash,
+    ]);
 
-    const rawUserData = result.rows[0];
-    return new User(rawUserData);
+    return new User(rows[0]);
   }
 
   // Fetches ALL users from the users table, uses the constructor
@@ -51,7 +75,6 @@ class User {
     return rawUserData ? new User(rawUserData) : null;
   }
 
-
   // Same as above but uses the username to find the user
   static async findByUsername(username) {
     const query = `SELECT * FROM users WHERE username = ?`;
@@ -61,21 +84,21 @@ class User {
   }
 
   // Updates the user that matches the given id with a new username.
-  // Returns the modified user, using the constructor to hide the passwordHash. 
+  // Returns the modified user, using the constructor to hide the passwordHash.
   static async update(id, username) {
     const query = `
       UPDATE users
       SET username=?
       WHERE id=?
       RETURNING *
-    `
-    const result = await knex.raw(query, [username, id])
+    `;
+    const result = await knex.raw(query, [username, id]);
     const rawUpdatedUser = result.rows[0];
     return rawUpdatedUser ? new User(rawUpdatedUser) : null;
-  };
+  }
 
   static async deleteAll() {
-    return knex('users').del()
+    return knex('users').del();
   }
 }
 
