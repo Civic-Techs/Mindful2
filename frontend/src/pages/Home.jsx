@@ -1,12 +1,13 @@
 export default function HomePage() {
   return (
     <>
-      <div>
+      <section id="join">
         <h1>Get Inspired Today!</h1>
         <p>Join a platform for challenges and goals. Share with the world.</p>
         <button>Join Here</button>
-      </div>
-      <div>
+      </section>
+      <section id="about">
+        <h2>About Mindful Motion</h2>
         <p>
           Mindful Motion is a platform to maximize teenagers’ productivity and
           ultimately boost their ambition by creating a web app that allows for
@@ -14,7 +15,7 @@ export default function HomePage() {
           on an app, but control the content being fed to them by only hosting
           projects and challenges to our users.
         </p>
-      </div>
+      </section>
     </>
   );
 }

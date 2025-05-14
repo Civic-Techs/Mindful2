@@ -12,6 +12,7 @@ import UserPage from "./pages/User";
 //import UserProfile from "./pages/UserProfile";
 import ChallengesPage from "./pages/Challenges";
 import ChallengeInfo from "./components/ChallengeDetails";
+import "../src/styles/App.css";
 
 export default function App() {
   // const { setCurrentUser } = useContext(UserContext);
