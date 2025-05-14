@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import CurrentUserContext from "../contexts/current-user-context";
-import { getUser } from "../adapters/user-adapter";
-import { logUserOut } from "../adapters/auth-adapter";
-import UpdateUsernameForm from "../components/UpdateUsernameForm";
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import CurrentUserContext from '../contexts/current-user-context';
+import { getUser } from '../adapters/user-adapter';
+import { logUserOut } from '../adapters/auth-adapter';
+import UpdateUsernameForm from '../components/UpdateUsernameForm';
 
 export default function UserPage() {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ export default function UserPage() {
   const handleLogout = async () => {
     logUserOut();
     setCurrentUser(null);
-    navigate("/");
+    navigate('/');
   };
 
   if (error)
@@ -44,8 +44,10 @@ export default function UserPage() {
   return (
     <>
       <h1>{profileUsername}</h1>
-      <p>Birthday: {userProfile.dob || "Not provided yet"}</p>
-      <p>Bio: {userProfile.bio || "No bio yet!"}</p>
+      <p>Birthday: {userProfile.dob || 'Not provided yet'}</p>
+      <p>Bio: {userProfile.bio || 'No bio yet!'}</p>
+      <h4>Challenges Joined</h4>
+      <ul></ul>
       {isCurrentUserProfile ? (
         <>
           <UpdateUsernameForm
@@ -55,7 +57,7 @@ export default function UserPage() {
           <button onClick={handleLogout}>Log Out</button>
         </>
       ) : (
-        ""
+        ''
       )}
     </>
   );
