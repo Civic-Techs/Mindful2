@@ -19,8 +19,8 @@ export default function SiteHeadingAndNav() {
           {currentUser ? (
             <>
               <li>
-                <NavLink to="/users" end={true}>
-                  Users
+                <NavLink to="/challenges" end={true}>
+                  Challenges
                 </NavLink>
               </li>
               <li>

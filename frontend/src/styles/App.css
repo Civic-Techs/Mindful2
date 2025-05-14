@@ -1,0 +1,22 @@
+/* Home Page */
+section#about {
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+section#about h2 {
+  font-size: 24px;
+  color: #333;
+  display: flex;
+  padding: 10px;
+}
+section#join {
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+section#join h2 {
+  font-size: 24px;
+  color: #333;
+  display: flex;
+  padding: 10px;
+}

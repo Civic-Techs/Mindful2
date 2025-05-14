@@ -1,5 +1,5 @@
-const knex = require('../db/knex');
-const bcrypt = require('bcrypt');
+const knex = require("../db/knex");
+const bcrypt = require("bcrypt");
 const SALT_ROUNDS = 12;
 
 class User {
@@ -11,18 +11,18 @@ class User {
     id,
     name,
     dob,
-    bio = '',
-    profile_img = '',
+    bio = "",
+    profile_img = "",
     email,
     username,
-    passwordHash,
+    password_hash,
   }) {
     this.id = id;
     this.name = name;
     this.dob = dob;
     this.email = email;
     this.username = username;
-    this.#passwordHash = passwordHash;
+    this.#passwordHash = password_hash;
     this.bio = bio;
     this.profile_img = profile_img;
   }
@@ -35,7 +35,15 @@ class User {
   // Hashes the given password and then creates a new user
   // in the users table. Returns the newly created user, using
   // the constructor to hide the passwordHash.
-  static async create(name, dob, bio, profile_img, email, username, password) {
+  static async create(
+    name,
+    dob,
+    bio = "",
+    profile_img = "",
+    email,
+    username,
+    password
+  ) {
     // hash the plain-text password using bcrypt before storing it in the database
     const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
 
@@ -98,7 +106,7 @@ class User {
   }
 
   static async deleteAll() {
-    return knex('users').del();
+    return knex("users").del();
   }
 }
 
