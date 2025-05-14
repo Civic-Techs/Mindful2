@@ -9,6 +9,7 @@ exports.registerUser = async (req, res) => {
   }
 
   // Body needs a username and password
+
   const { name, dob, bio, profile_img, email, username, password } = req.body;
   if (!email || !name || !dob || !username || !password) {
     return res
