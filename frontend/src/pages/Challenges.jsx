@@ -9,10 +9,7 @@ function ChallengesPage() {
     const getChallenges = async () => {
       try {
         const [data, error] = await allChallenges();
-
-        // CHECKING DATA
         console.log("challenge data:", data);
-        //CHECKING DATA
         if (error) {
           console.error("Error fetching challenges:", error);
           return;
@@ -24,16 +21,51 @@ function ChallengesPage() {
     };
     getChallenges();
   }, []);
+
   return (
     <>
       <h2>Choose a Challenge and Get Started!</h2>
-      <ul style={{ listStyleType: "none", paddingLeft: 0 }}>
-        {allChallengesData.map((challenge) => (
-          <li key={challenge.id}>
-            <Link to={`/challenges/${challenge.id}`}>{challenge.title}</Link>
-          </li>
+      <div style={{ 
+        display: "grid",
+        gridTemplateColumns: "repeat(3, 1fr)",
+        gap: "16px",
+        maxWidth: "600px",
+        margin: "20px auto",
+      }}>
+        {allChallengesData.slice(0, 6).map((challenge, index) => (
+          <Link 
+            to={`/challenges/${challenge.id}`} 
+            key={challenge.id}
+            style={{
+              textDecoration: "none",
+              color: "inherit",
+            }}
+          >
+            <div
+              style={{
+                borderRadius: "12px",
+                overflow: "hidden",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                height: "100%",
+              }}
+            >
+              <div style={{ 
+                backgroundColor: "red",
+                height: "100px",
+              }} />
+              
+              <div style={{ 
+                padding: "12px",
+                textAlign: "center",
+                backgroundColor: "white",
+                fontWeight: "500",
+              }}>
+                {challenge.title}
+              </div>
+            </div>
+          </Link>
         ))}
-      </ul>
+      </div>
     </>
   );
 }
