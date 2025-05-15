@@ -7,16 +7,20 @@ function ChallengesPage() {
 
   useEffect(() => {
     const getChallenges = async () => {
-      const [data, error] = await allChallenges();
+      try {
+        const [data, error] = await allChallenges();
 
-      // CHECKING DATA
-      console.log("challenge data:", data);
-      //CHECKING DATA
-      if (error) {
-        console.error("Error fetching challenges:", error);
-        return;
+        // CHECKING DATA
+        console.log("challenge data:", data);
+        //CHECKING DATA
+        if (error) {
+          console.error("Error fetching challenges:", error);
+          return;
+        }
+        setAllChallengesData(data);
+      } catch (err) {
+        console.error("Unexpected error at challenges");
       }
-      setAllChallengesData(data);
     };
     getChallenges();
   }, []);

@@ -1,22 +1,147 @@
 /* Home Page */
-section#about {
+section#mission {
   background-color: #f0f0f0;
   padding: 20px;
+  width: 600px;
 }
-section#about h2 {
+
+section#mission h2 {
   font-size: 24px;
   color: #333;
   display: flex;
-  padding: 10px;
+  padding: 0 0 25px 0;
 }
+
 section#join {
   background-color: #f0f0f0;
   padding: 20px;
+  width: 600px;
 }
 
-section#join h2 {
+section#join h1 {
+  font-size: 24px;
+  display: flex;
+  padding: 0 0 15px 0;
+}
+
+#join-btn {
+  padding: 10px 10px 10px 10px;
+  background: linear-gradient(90deg, #8b5cf6, #6366f1);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+  margin: 80px 10px 10px 0px;
+}
+
+#join-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+}
+
+#home-challenges ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  border-radius: 10px;
+  background: #f3f3f3;
+  height: 130px;
+  width: 850px;
+  margin-bottom: 40px;
+}
+
+#home-challenges h2 {
+  font-size: 24px;
+  color: #333;
+  padding: 10px 10px 8px 17px;
+}
+
+/* Home Page */
+section#mission {
+  background-color: #f0f0f0;
+  padding: 20px;
+  width: 600px;
+}
+
+section#mission h2 {
   font-size: 24px;
   color: #333;
   display: flex;
-  padding: 10px;
+  padding: 0 0 25px 0;
+}
+
+section#join {
+  background-color: #f0f0f0;
+  padding: 20px;
+  width: 600px;
+}
+
+section#join h1 {
+  font-size: 24px;
+  display: flex;
+  padding: 0 0 15px 0;
+}
+
+#join-btn {
+  padding: 10px 10px 10px 10px;
+  background: linear-gradient(90deg, #8b5cf6, #6366f1);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+  margin: 80px 10px 10px 0px;
+}
+
+#join-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+}
+
+#home-challenges ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 1rem;
+  border-radius: 10px;
+  background: #f3f3f3;
+  max-width: 850px;
+  max-height: 150px;
+  margin: 0 auto 40px auto;
+  overflow-x: auto; /* Optional: make scrollable on smaller screens */
+}
+
+#home-challenges h2 {
+  font-size: 24px;
+  color: #333;
+  padding: 10px 10px 8px 17px;
+}
+
+.challenge-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.few-challenges li {
+  background-color: white;
+  border-radius: 8px;
+  flex: 1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  height: 104px;
+}
+
+.few-challenges p {
+  font-size: 0.95rem;
+  color: #666;
+  margin: 0;
 }
