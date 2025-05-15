@@ -1,14 +1,14 @@
-# Project Name
+# Mindful Motion
 
-> Project Mission Statement
+> Our goal is that this web app will allow for more teenagers to be more productive with their time
 
 ## Team
 
-  - teamMember: **Scrum Master, Developer**
-  - teamMember: **Developer**
-  - teamMember: **Developer**
+- **Scrum Master**: **Catalina Dinozo**
+- **Development Team Members**: Catalina Dinozo, Tyron Odame, Issac Bien-Aime, [Ajene Christian](https://github.com/ajenec)
 
 ## Table of Contents
+
 - [Getting Started](#getting-started)
   - [Build and Start Commands](#build-and-start-commands)
   - [Technologies Used](#technologies-used)
@@ -38,7 +38,7 @@ PG_PASS='12345'
 PG_DB='my_react_express_auth_database'
 
 # Replace session secret with your own random string!
-# This is used by handleCookieSessions to hash your cookie data 
+# This is used by handleCookieSessions to hash your cookie data
 SESSION_SECRET='db8c3cffebb2159b46ee38ded600f437ee080f8605510ee360758f6976866e00d603d9b3399341b0cd37dfb8e599fff3'
 
 # When you deploy your database on render, this string can be used to test SQL queries to the deployed database.

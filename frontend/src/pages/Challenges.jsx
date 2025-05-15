@@ -25,16 +25,18 @@ function ChallengesPage() {
   return (
     <>
       <h2>Choose a Challenge and Get Started!</h2>
-      <div style={{ 
-        display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)",
-        gap: "16px",
-        maxWidth: "600px",
-        margin: "20px auto",
-      }}>
-        {allChallengesData.slice(0, 6).map((challenge, index) => (
-          <Link 
-            to={`/challenges/${challenge.id}`} 
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: "16px",
+          maxWidth: "600px",
+          margin: "20px auto",
+        }}
+      >
+        {allChallengesData.map((challenge) => (
+          <Link
+            to={`/challenges/${challenge.id}`}
             key={challenge.id}
             style={{
               textDecoration: "none",
@@ -49,17 +51,21 @@ function ChallengesPage() {
                 height: "100%",
               }}
             >
-              <div style={{ 
-                backgroundColor: "red",
-                height: "100px",
-              }} />
-              
-              <div style={{ 
-                padding: "12px",
-                textAlign: "center",
-                backgroundColor: "white",
-                fontWeight: "500",
-              }}>
+              <div
+                style={{
+                  backgroundColor: "red",
+                  height: "100px",
+                }}
+              />
+
+              <div
+                style={{
+                  padding: "12px",
+                  textAlign: "center",
+                  backgroundColor: "white",
+                  fontWeight: "500",
+                }}
+              >
                 {challenge.title}
               </div>
             </div>
