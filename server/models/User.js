@@ -1,5 +1,8 @@
-const knex = require("../db/knex");
-const bcrypt = require("bcrypt");
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable comma-dangle */
+/* eslint-disable default-param-last */
+const knex = require('../db/knex');
+const bcrypt = require('bcrypt');
 const SALT_ROUNDS = 12;
 
 class User {
@@ -11,8 +14,8 @@ class User {
     id,
     name,
     dob,
-    bio = "",
-    profile_img = "",
+    bio = '',
+    profile_img = '',
     email,
     username,
     password_hash,
@@ -28,9 +31,8 @@ class User {
   }
 
   // Controllers can use this instance method to validate passwords prior to sending responses
-  isValidPassword = async (password) => {
-    return bcrypt.compare(password, this.#passwordHash);
-  };
+  isValidPassword = async (password) =>
+    bcrypt.compare(password, this.#passwordHash);
 
   // Hashes the given password and then creates a new user
   // in the users table. Returns the newly created user, using
@@ -38,8 +40,8 @@ class User {
   static async create(
     name,
     dob,
-    bio = "",
-    profile_img = "",
+    bio = '',
+    profile_img = '',
     email,
     username,
     password
@@ -106,7 +108,7 @@ class User {
   }
 
   static async deleteAll() {
-    return knex("users").del();
+    return knex('users').del();
   }
 }
 

@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /// ////////////////////////////
 // Imports
 /// ////////////////////////////
@@ -15,8 +16,10 @@ const logErrors = require('./middleware/logErrors');
 // controller imports
 const authControllers = require('./controllers/authControllers');
 const userControllers = require('./controllers/userControllers');
+
 const app = express();
 const challControllers = require('./controllers/challController');
+const participantsControllers = require('./controllers/participantsControllers');
 
 // middleware
 app.use(handleCookieSessions); // adds a session property to each request representing the cookie
@@ -52,8 +55,12 @@ app.get('/api/challenges/:id', challControllers.getChallengeById);
 // Participant Routes
 /// ////////////////////////////
 
-// app.post('/api/participants', challControllers.addParticipant);
-
+app.post('/api/participants', participantsControllers.addParticipant);
+// app.get('/api/participants', participantsControllers.getAllParticipantsById);
+app.get(
+  '/api/participants/:id',
+  participantsControllers.getChallengeTitlesByUserId
+);
 /// ////////////////////////////
 // Fallback Routes
 /// ////////////////////////////
