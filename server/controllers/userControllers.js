@@ -40,7 +40,7 @@ exports.updateUser = async (req, res) => {
   const userToModify = Number(req.params.id);
   const userRequestingChange = Number(req.session.userId);
   if (userRequestingChange !== userToModify) {
-    return res.status(403).send({ message: "Unauthorized." });
+    return res.status(403).send({ message: 'Unauthorized.' });
   }
 
   const updatedUser = await User.update(userToModify, username);
