@@ -1,4 +1,4 @@
-const knex = require("../db/knex");
+const knex = require('../db/knex');
 
 class Challenge {
   constructor({
@@ -23,10 +23,10 @@ class Challenge {
 
   static async create({
     title,
-    description = "",
-    img = "",
+    description = '',
+    img = '',
     is_contest = false,
-    end_time = "",
+    end_time = '',
     user_id,
   }) {
     const query = `
@@ -74,15 +74,15 @@ class Challenge {
     const updates = [];
 
     if (title?.trim()) {
-      updates.push("title = ?");
+      updates.push('title = ?');
       fields.push(title);
     }
     if (description?.trim()) {
-      updates.push("description = ?");
+      updates.push('description = ?');
       fields.push(description);
     }
     if (img?.trim()) {
-      updates.push("img = ?");
+      updates.push('img = ?');
       fields.push(img);
     }
 
@@ -92,7 +92,7 @@ class Challenge {
 
     const query = `
             UPDATE challenges
-            SET ${updates.join(", ")}
+            SET ${updates.join(', ')}
             WHERE id = ?
             RETURNING *
         `;
@@ -114,7 +114,7 @@ class Challenge {
   }
 
   static async deleteAll() {
-    return await knex("challenges").del();
+    return knex('challenges').del();
   }
 }
 
