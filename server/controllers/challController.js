@@ -75,10 +75,10 @@ exports.updateChallenge = async (req, res) => {
       challenge: updateChall,
     });
   } catch (error) {
-    console.error('Error creating challenge: ', error);
+    console.error('Error updating challenge: ', error);
     res
       .status(500)
-      .send({ message: 'An error occurred while creating the challenge.' });
+      .send({ message: 'An error occurred while updating the challenge.' });
   }
 };
 
@@ -110,4 +110,3 @@ exports.getChallengeById = async (req, res) => {
   }
 };
 
-// exports.addParticipant = async (req, res) => {
