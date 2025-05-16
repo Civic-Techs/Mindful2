@@ -37,7 +37,7 @@ exports.createChallenge = async (req, res) => {
 
     req.session.challId = chall.id;
 
-    res.status(200).send({
+    return res.status(200).send({
       id: chall.id,
       title: chall.title,
       description: chall.description,
@@ -49,6 +49,7 @@ exports.createChallenge = async (req, res) => {
   } catch (error) {
     console
       .error('Error creating challenge: ', error)
+    return res
       .status(500)
       .send({ message: 'An error occurred while registering the challenge.' });
   }
@@ -70,13 +71,13 @@ exports.updateChallenge = async (req, res) => {
       return res.status(404).send({ message: 'Challenge not found.' });
     }
 
-    res.status(200).send({
+    return res.status(200).send({
       message: 'Challenge updated successfully.',
       challenge: updateChall,
     });
   } catch (error) {
     console.error('Error updating challenge: ', error);
-    res
+    return res
       .status(500)
       .send({ message: 'An error occurred while updating the challenge.' });
   }
@@ -85,10 +86,10 @@ exports.updateChallenge = async (req, res) => {
 exports.getAllChallenges = async (req, res) => {
   try {
     const getChallenges = await Challenges.list();
-    res.status(200).send(getChallenges);
+    return res.status(200).send(getChallenges);
   } catch (error) {
     console.error('Error fetching challenges:', error);
-    res
+    return res
       .status(500)
       .send({ message: 'An error occurred while fetching challenges.' });
   }
@@ -101,10 +102,10 @@ exports.getChallengeById = async (req, res) => {
     if (!challengesId) {
       return res.status(404).send({ message: 'Challenge not found.' });
     }
-    res.status(200).send(challengesId);
+    return res.status(200).send(challengesId);
   } catch (error) {
     console.error('Error fetching challenge by ID:', error);
-    res
+    return res
       .status(500)
       .send({ message: 'An error occurred while fetching the challenge.' });
   }
