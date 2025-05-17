@@ -5,7 +5,7 @@
 ## Team
 
 - **Scrum Master**: **Catalina Dinozo**
-- **Development Team Members**: Catalina Dinozo, Tyron Odame, Issac Bien-Aime, [Ajene Christian](https://github.com/ajenec)
+- **Development Team Members**: [Catalina Dinozo](https://github.com/csdinozo), [Tyron Odame](https://github.com/TyronOdame), [Issac Bien-Aime](https://github.com/Issactly), [Ajene Christian](https://github.com/ajenec)
 
 ## Table of Contents
 
