@@ -10,9 +10,6 @@ function ChallengesPage() {
       try {
         const [data, error] = await allChallenges();
 
-        // CHECKING DATA
-        console.log("challenge data:", data);
-        //CHECKING DATA
         if (error) {
           console.error("Error fetching challenges:", error);
           return;

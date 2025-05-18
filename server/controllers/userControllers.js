@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const User = require("../models/User");
 
 /* 
 GET /api/users
@@ -18,7 +18,7 @@ exports.showUser = async (req, res) => {
 
   const user = await User.find(id);
   if (!user) {
-    return res.status(404).send({ message: 'User not found.' });
+    return res.status(404).send({ message: "User not found." });
   }
 
   res.send(user);
@@ -29,9 +29,9 @@ PATCH /api/users/:id
 Updates a single user (if found) and only if authorized
 */
 exports.updateUser = async (req, res) => {
-  const { username } = req.body;
-  if (!username) {
-    return res.status(400).send({ message: 'New username required.' });
+  const { username, bio } = req.body;
+  if (!username || !bio) {
+    return res.status(400).send({ message: "New username required." });
   }
 
   // A user is only authorized to modify their own user information
@@ -40,12 +40,12 @@ exports.updateUser = async (req, res) => {
   const userToModify = Number(req.params.id);
   const userRequestingChange = Number(req.session.userId);
   if (userRequestingChange !== userToModify) {
-    return res.status(403).send({ message: 'Unauthorized.' });
+    return res.status(403).send({ message: "Unauthorized." });
   }
 
-  const updatedUser = await User.update(userToModify, username);
+  const updatedUser = await User.update(userToModify, username, bio);
   if (!updatedUser) {
-    return res.status(404).send({ message: 'User not found.' });
+    return res.status(404).send({ message: "User not found." });
   }
 
   res.send(updatedUser);
