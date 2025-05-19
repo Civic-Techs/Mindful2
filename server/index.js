@@ -50,6 +50,8 @@ app.patch('/api/users/:id', checkAuthentication, userControllers.updateUser);
 // For challenges
 app.get('/api/challenges', challControllers.getAllChallenges);
 app.get('/api/challenges/:id', challControllers.getChallengeById);
+//
+app.post('/api/challenges', challControllers.createChallenge);
 
 /// ////////////////////////////
 // Participant Routes

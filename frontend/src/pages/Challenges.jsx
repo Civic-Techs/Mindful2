@@ -1,6 +1,6 @@
-import { allChallenges } from "../adapters/challengesFetch";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { allChallenges } from '../adapters/challengesFetch';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function ChallengesPage() {
   const [allChallengesData, setAllChallengesData] = useState([]);
@@ -9,14 +9,14 @@ function ChallengesPage() {
     const getChallenges = async () => {
       try {
         const [data, error] = await allChallenges();
-        console.log("challenge data:", data);
+        console.log('challenge data:', data);
         if (error) {
-          console.error("Error fetching challenges:", error);
+          console.error('Error fetching challenges:', error);
           return;
         }
         setAllChallengesData(data);
       } catch (err) {
-        console.error("Unexpected error at challenges");
+        console.error('Unexpected error at challenges');
       }
     };
     getChallenges();
@@ -25,41 +25,47 @@ function ChallengesPage() {
   return (
     <>
       <h2>Choose a Challenge and Get Started!</h2>
-      <div style={{ 
-        display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)",
-        gap: "16px",
-        maxWidth: "600px",
-        margin: "20px auto",
-      }}>
-        {allChallengesData.slice(0, 6).map((challenge, index) => (
-          <Link 
-            to={`/challenges/${challenge.id}`} 
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: '16px',
+          maxWidth: '600px',
+          margin: '20px auto',
+        }}
+      >
+        {allChallengesData.map((challenge, index) => (
+          <Link
+            to={`/challenges/${challenge.id}`}
             key={challenge.id}
             style={{
-              textDecoration: "none",
-              color: "inherit",
+              textDecoration: 'none',
+              color: 'inherit',
             }}
           >
             <div
               style={{
-                borderRadius: "12px",
-                overflow: "hidden",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-                height: "100%",
+                borderRadius: '12px',
+                overflow: 'hidden',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                height: '100%',
               }}
             >
-              <div style={{ 
-                backgroundColor: "red",
-                height: "100px",
-              }} />
-              
-              <div style={{ 
-                padding: "12px",
-                textAlign: "center",
-                backgroundColor: "white",
-                fontWeight: "500",
-              }}>
+              <div
+                style={{
+                  backgroundColor: 'red',
+                  height: '100px',
+                }}
+              />
+
+              <div
+                style={{
+                  padding: '12px',
+                  textAlign: 'center',
+                  backgroundColor: 'white',
+                  fontWeight: '500',
+                }}
+              >
                 {challenge.title}
               </div>
             </div>

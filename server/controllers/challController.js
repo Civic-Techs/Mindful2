@@ -109,5 +109,3 @@ exports.getChallengeById = async (req, res) => {
       .send({ message: 'An error occurred while fetching the challenge.' });
   }
 };
-
-// exports.addParticipant = async (req, res) => {
