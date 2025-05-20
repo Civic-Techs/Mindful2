@@ -46,43 +46,49 @@ export default function UserPage() {
   const profileBio = isCurrentUserProfile ? currentUser.bio : userProfile.bio;
   return (
     <>
-      <div id="userHeader">
-        <h1 id="userFace">{profileUsername}</h1>
-      </div>
-      <div id="userInfo">
-        <p>
-          <strong>Birthday:</strong> {userProfile.dob || "Not provided yet"}
-        </p>
-        <p>
-          <strong>Bio:</strong> {profileBio || "No bio yet!"}
-        </p>
-        <h4>Challenges Joined</h4>
-        <ul>
-          {challengeTitles
-            ? challengeTitles.map((chall, index) => (
-                <li key={chall.challenge_id ?? index}>
-                  <p>{chall.title}</p>
-                </li>
-              ))
-            : "No challenges joined :("}
-        </ul>
-      </div>
-      {isCurrentUserProfile ? (
-        <>
-          <button onClick={handleLogout}>Logout</button>
-          <button onClick={() => setShowForm(!showForm)}>
-            {showForm ? "Cancel Edit" : "Update Profile"}
-          </button>
-          {showForm && (
-            <UpdateUsernameForm
-              currentUser={currentUser}
-              setCurrentUser={setCurrentUser}
-            />
+      <div className="userHeader">
+        <div className="leftPanel">
+          <h1 id="userFace">{profileUsername}</h1>
+
+          {isCurrentUserProfile ? (
+            <>
+              <button id="logout-btn" onClick={handleLogout}>
+                Logout
+              </button>
+              <button id="update-btn" onClick={() => setShowForm(!showForm)}>
+                {showForm ? "Cancel Edit" : "Update Profile"}
+              </button>
+              {showForm && (
+                <UpdateUsernameForm
+                  currentUser={currentUser}
+                  setCurrentUser={setCurrentUser}
+                />
+              )}
+            </>
+          ) : (
+            ""
           )}
-        </>
-      ) : (
-        ""
-      )}
+        </div>
+
+        <div className="rightPanel" id="userInfo">
+          <p>
+            <strong>Birthday:</strong> {userProfile.dob || "Not provided yet"}
+          </p>
+          <p>
+            <strong>Bio:</strong> {profileBio || "No bio yet!"}
+          </p>
+          <h3>Challenges Joined</h3>
+          <ul>
+            {challengeTitles
+              ? challengeTitles.map((chall, index) => (
+                  <li key={chall.challenge_id ?? index}>
+                    <p>{chall.title}</p>
+                  </li>
+                ))
+              : "No challenges joined :("}
+          </ul>
+        </div>
+      </div>
     </>
   );
 }
