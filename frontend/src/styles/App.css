@@ -128,3 +128,18 @@
   transform: translateY(-5px);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
 }
+
+/* Challenge Page */
+.challengeDetails {
+  align-items: center;
+  padding: 2rem;
+  background-color: #f0f0f0;
+  width: 700px;
+  margin: 0 auto;
+}
+
+.challengeActions {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 1rem;
+}
