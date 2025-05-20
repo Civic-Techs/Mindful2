@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreateChallenge({ onChallengeCreated }) {
   const [formData, setFormData] = useState({
@@ -8,6 +9,8 @@ export default function CreateChallenge({ onChallengeCreated }) {
     is_contest: false,
     end_time: '',
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -44,6 +47,7 @@ export default function CreateChallenge({ onChallengeCreated }) {
         is_contest: false,
         end_time: '',
       });
+      navigate('/challenges');
     } catch (error) {
       console.error('Error creating challenge:', error);
       alert('An error occurred while creating the challenge.');
