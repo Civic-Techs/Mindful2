@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import CurrentUserContext from '../contexts/current-user-context';
 
 export default function CreateChallenge({ onChallengeCreated }) {
+  const { currentUser } = useContext(CurrentUserContext);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     img: '',
     is_contest: false,
     end_time: '',
+    user_id: currentUser?.id || '',
   });
 
   const navigate = useNavigate();
@@ -23,15 +26,17 @@ export default function CreateChallenge({ onChallengeCreated }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/create-challenges', {
+      const response = await fetch('/api/challenges', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
+      // console.log(formData);
 
       if (!response.ok) {
+        // console.log(response);
         throw new Error('Failed to create challenge');
       }
 
@@ -46,6 +51,7 @@ export default function CreateChallenge({ onChallengeCreated }) {
         img: '',
         is_contest: false,
         end_time: '',
+        user_id: currentUser?.id || '',
       });
       navigate('/challenges');
     } catch (error) {
