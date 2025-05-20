@@ -77,7 +77,9 @@ export default function UserPage() {
           <p>
             <strong>Bio:</strong> {profileBio || "No bio yet!"}
           </p>
-          <h3>Challenges Joined</h3>
+          <h3>
+            <strong>Challenges Joined</strong>
+          </h3>
           <ul>
             {challengeTitles
               ? challengeTitles.map((chall, index) => (
