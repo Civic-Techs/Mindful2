@@ -9,7 +9,7 @@ function ChallengesPage() {
     const getChallenges = async () => {
       try {
         const [data, error] = await allChallenges();
-        console.log("challenge data:", data);
+
         if (error) {
           console.error("Error fetching challenges:", error);
           return;

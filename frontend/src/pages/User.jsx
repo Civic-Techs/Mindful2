@@ -1,25 +1,19 @@
-import { useContext, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import CurrentUserContext from '../contexts/current-user-context';
-import { getUser } from '../adapters/user-adapter';
-import { logUserOut } from '../adapters/auth-adapter';
-import UpdateUsernameForm from '../components/UpdateUsernameForm';
-import { getChallengeTitlesByUserId } from '../adapters/participants-adapter';
-// import { getChallengeById } from '../../../server/controllers/challController';
-import {
-  basicFetchOptions,
-  getPatchOptions,
-  getPostOptions,
-} from '../utils/fetchingUtils';
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import CurrentUserContext from "../contexts/current-user-context";
+import { getUser } from "../adapters/user-adapter";
+import { logUserOut } from "../adapters/auth-adapter";
+import UpdateUsernameForm from "../components/UpdateUsernameForm";
+import { getChallengeTitlesByUserId } from "../adapters/participants-adapter";
 
 export default function UserPage() {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [userProfile, setUserProfile] = useState(null);
-  // const [error, setError] = useState(null);
   const [challengeTitles, setChallengeTitles] = useState();
-  // const [challengeTitleError, setChallengeTitleError] = useState(null);
   const { id } = useParams();
+  const [showForm, setShowForm] = useState(false);
+
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
 
   useEffect(() => {
@@ -29,12 +23,9 @@ export default function UserPage() {
       setUserProfile(user);
 
       const data = await getChallengeTitlesByUserId(id);
-      console.log(data);
+      // console.log(data);
 
       setChallengeTitles(data);
-      // console.log(challengeTitles);
-      // if (error) return setChallengeTitleError(error);
-      // setChallengeTitles(challengeTitles);
     };
     loadUser();
   }, [id]);
@@ -42,13 +33,8 @@ export default function UserPage() {
   const handleLogout = async () => {
     logUserOut();
     setCurrentUser(null);
-    navigate('/');
+    navigate("/");
   };
-
-  // if (error)
-  //   return (
-  //     <p>Sorry, there was a problem loading user. Please try again later.</p>
-  //   );
 
   if (!userProfile) return null;
 
@@ -56,32 +42,46 @@ export default function UserPage() {
   const profileUsername = isCurrentUserProfile
     ? currentUser.username
     : userProfile.username;
-  console.log(challengeTitles);
+
+  const profileBio = isCurrentUserProfile ? currentUser.bio : userProfile.bio;
   return (
     <>
-      <h1>{profileUsername}</h1>
-      <p>Birthday: {userProfile.dob || 'Not provided yet'}</p>
-      <p>Bio: {userProfile.bio || 'No bio yet!'}</p>
-      <h4>Challenges Joined</h4>
-      <ul>
-        {challengeTitles
-          ? challengeTitles.map((chall) => (
-              <li key={chall.id}>
-                <p>{chall.title}</p>
-              </li>
-            ))
-          : 'No challenges joined :('}
-      </ul>
+      <div id="userHeader">
+        <h1 id="userFace">{profileUsername}</h1>
+      </div>
+      <div id="userInfo">
+        <p>
+          <strong>Birthday:</strong> {userProfile.dob || "Not provided yet"}
+        </p>
+        <p>
+          <strong>Bio:</strong> {profileBio || "No bio yet!"}
+        </p>
+        <h4>Challenges Joined</h4>
+        <ul>
+          {challengeTitles
+            ? challengeTitles.map((chall, index) => (
+                <li key={chall.challenge_id ?? index}>
+                  <p>{chall.title}</p>
+                </li>
+              ))
+            : "No challenges joined :("}
+        </ul>
+      </div>
       {isCurrentUserProfile ? (
         <>
-          <UpdateUsernameForm
-            currentUser={currentUser}
-            setCurrentUser={setCurrentUser}
-          />
-          <button onClick={handleLogout}>Log Out</button>
+          <button onClick={handleLogout}>Logout</button>
+          <button onClick={() => setShowForm(!showForm)}>
+            {showForm ? "Cancel Edit" : "Update Profile"}
+          </button>
+          {showForm && (
+            <UpdateUsernameForm
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
+            />
+          )}
         </>
       ) : (
-        ''
+        ""
       )}
     </>
   );

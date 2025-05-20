@@ -50,8 +50,8 @@ export default function SignUpPage() {
 
   return (
     <>
-      <h1>Sign Up</h1>
       <form
+        className="signup-form"
         onSubmit={handleSubmit}
         onChange={handleChange}
         aria-labelledby="create-heading"
@@ -114,10 +114,12 @@ export default function SignUpPage() {
 
         <button>Sign Up Now!</button>
       </form>
-      {!!errorText && <p>{errorText}</p>}
-      <p>
-        Already have an account with us? <Link to="/login">Log in</Link>
-      </p>
+      <div id="signup-redirect">
+        {!!errorText && <p>{errorText}</p>}
+        <p>
+          Already have an account with us? <Link to="/login">Log in</Link>
+        </p>
+      </div>
     </>
   );
 }
