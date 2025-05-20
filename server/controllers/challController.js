@@ -1,11 +1,11 @@
-const Challenges = require('../models/Challenge');
+const Challenges = require("../models/Challenge");
 
 exports.createChallenge = async (req, res) => {
   console.log(req.body);
   try {
     // Ensure the request body exists
     if (!req.body) {
-      return res.status(400).send({ message: 'Request body is required.' });
+      return res.status(400).send({ message: "Request body is required." });
     }
 
     // Extract required fields from the request body
@@ -22,7 +22,7 @@ exports.createChallenge = async (req, res) => {
     // Validate required fields
     if (!title) {
       return res.status(400).send({
-        message: 'Title is required.',
+        message: "Title is required.",
       });
     }
 
@@ -40,7 +40,7 @@ exports.createChallenge = async (req, res) => {
 
     req.session.challId = chall.id;
 
-    res.status(200).send({
+    return res.status(200).send({
       id: chall.id,
       title: chall.title,
       description: chall.description,
@@ -50,10 +50,10 @@ exports.createChallenge = async (req, res) => {
       user_id: chall.user_id,
     });
   } catch (error) {
-    console
-      .error('Error creating challenge: ', error)
+    console.error("Error creating challenge: ", error);
+    return res
       .status(500)
-      .send({ message: 'An error occurred while registering the challenge.' });
+      .send({ message: "An error occurred while registering the challenge." });
   }
 };
 
@@ -70,30 +70,30 @@ exports.updateChallenge = async (req, res) => {
     });
 
     if (!updateChall) {
-      return res.status(404).send({ message: 'Challenge not found.' });
+      return res.status(404).send({ message: "Challenge not found." });
     }
 
-    res.status(200).send({
-      message: 'Challenge updated successfully.',
+    return res.status(200).send({
+      message: "Challenge updated successfully.",
       challenge: updateChall,
     });
   } catch (error) {
-    console.error('Error creating challenge: ', error);
-    res
+    console.error("Error updating challenge: ", error);
+    return res
       .status(500)
-      .send({ message: 'An error occurred while creating the challenge.' });
+      .send({ message: "An error occurred while updating the challenge." });
   }
 };
 
 exports.getAllChallenges = async (req, res) => {
   try {
     const getChallenges = await Challenges.list();
-    res.status(200).send(getChallenges);
+    return res.status(200).send(getChallenges);
   } catch (error) {
-    console.error('Error fetching challenges:', error);
-    res
+    console.error("Error fetching challenges:", error);
+    return res
       .status(500)
-      .send({ message: 'An error occurred while fetching challenges.' });
+      .send({ message: "An error occurred while fetching challenges." });
   }
 };
 
@@ -102,13 +102,13 @@ exports.getChallengeById = async (req, res) => {
     const { id } = req.params;
     const challengesId = await Challenges.find(id);
     if (!challengesId) {
-      return res.status(404).send({ message: 'Challenge not found.' });
+      return res.status(404).send({ message: "Challenge not found." });
     }
-    res.status(200).send(challengesId);
+    return res.status(200).send(challengesId);
   } catch (error) {
-    console.error('Error fetching challenge by ID:', error);
-    res
+    console.error("Error fetching challenge by ID:", error);
+    return res
       .status(500)
-      .send({ message: 'An error occurred while fetching the challenge.' });
+      .send({ message: "An error occurred while fetching the challenge." });
   }
 };

@@ -45,6 +45,13 @@ export default function CreatePost({ onPostCreated, challengeId }) {
                 onPostCreated(newPost);
 
                 await addParticipant({ user_id: formData.user_id, challenge_id: formData.challenge_id });
+
+                try {
+                    await addParticipant({ user_id: formData.user_id, challenge_id: formData.challenge_id });
+                } catch (error) {
+                    console.error("Error adding participant:", error);
+                    return;
+                }
             }
 
             alert("Post created and you have joined the challenge!");

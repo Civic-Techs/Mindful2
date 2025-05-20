@@ -226,7 +226,7 @@ h1 {
 .rightPanel {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly; /* or space-between */
+  justify-content: center; /* or space-between */
   align-items: flex-start;
   min-height: 400px; /* Adjust as needed for your layout */
 }

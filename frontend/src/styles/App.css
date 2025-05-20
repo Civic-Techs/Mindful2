@@ -101,6 +101,10 @@
   font-family: copperplate;
 }
 
+.few-challenges h3 {
+  font-size: 20px;
+}
+
 .few-challenges {
   display: flex;
   flex-direction: row;
@@ -113,6 +117,10 @@
   max-width: 900px;
   font-family: baskerville;
   font-weight: bold;
+}
+
+.few-challenges p {
+  font-size: 16px;
 }
 
 .few-challenges li {
@@ -158,4 +166,7 @@ textarea {
   border-radius: 0.5rem;
   font-size: 1rem;
   background: whitesmoke;
+}
+
+.create-btn {
 }

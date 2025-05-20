@@ -54,7 +54,9 @@ export default function HomePage() {
                 textAlign: "center",
               }}
             >
-              <h3 className="challenge-title">{chall.title}</h3>
+              <h3 className="challenge-title">
+                <strong>{chall.title}</strong>
+              </h3>
               <p>{chall.description}</p>
             </li>
           ))}
