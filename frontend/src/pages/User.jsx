@@ -46,19 +46,27 @@ export default function UserPage() {
   const profileBio = isCurrentUserProfile ? currentUser.bio : userProfile.bio;
   return (
     <>
-      <h1>{profileUsername}</h1>
-      <p>Birthday: {userProfile.dob || "Not provided yet"}</p>
-      <p>Bio: {profileBio || "No bio yet!"}</p>
-      <h4>Challenges Joined</h4>
-      <ul>
-        {challengeTitles
-          ? challengeTitles.map((chall, index) => (
-              <li key={chall.challenge_id ?? index}>
-                <p>{chall.title}</p>
-              </li>
-            ))
-          : "No challenges joined :("}
-      </ul>
+      <div id="userHeader">
+        <h1 id="userFace">{profileUsername}</h1>
+      </div>
+      <div id="userInfo">
+        <p>
+          <strong>Birthday:</strong> {userProfile.dob || "Not provided yet"}
+        </p>
+        <p>
+          <strong>Bio:</strong> {profileBio || "No bio yet!"}
+        </p>
+        <h4>Challenges Joined</h4>
+        <ul>
+          {challengeTitles
+            ? challengeTitles.map((chall, index) => (
+                <li key={chall.challenge_id ?? index}>
+                  <p>{chall.title}</p>
+                </li>
+              ))
+            : "No challenges joined :("}
+        </ul>
+      </div>
       {isCurrentUserProfile ? (
         <>
           <button onClick={handleLogout}>Logout</button>

@@ -1,147 +1,130 @@
 /* Home Page */
-section#mission {
-  background-color: #f0f0f0;
-  padding: 20px;
-  width: 600px;
-}
-
-section#mission h2 {
-  font-size: 24px;
-  color: #333;
+#join {
   display: flex;
-  padding: 0 0 25px 0;
-}
-
-section#join {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   background-color: #f0f0f0;
-  padding: 20px;
-  width: 600px;
+  padding: 25px;
+  border-radius: 15px;
+  max-width: 600px;
+  margin: 100px auto 40px auto;
+  font-family: baskerville;
+  gap: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-section#join h1 {
-  font-size: 24px;
-  display: flex;
-  padding: 0 0 15px 0;
+#join h1 {
+  font-size: 2rem;
+  align-self: flex-start;
+  font-family: copperplate;
+  margin-bottom: 20px;
+}
+
+#join p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  align-self: flex-start;
 }
 
 #join-btn {
-  padding: 10px 10px 10px 10px;
-  background: linear-gradient(90deg, #8b5cf6, #6366f1);
-  color: white;
+  background-color: lightblue;
+  color: black;
+  font-size: 1.2rem;
+  padding: 12px 24px;
   border: none;
-  border-radius: 10px;
-  font-size: 15px;
-  font-weight: 600;
+  border-radius: 12px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
-  margin: 80px 10px 10px 0px;
+  font-family: copperplate;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+#join-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 0;
+  transition: left 0.4s ease;
+}
+
+#join-btn:hover::before {
+  left: 0;
 }
 
 #join-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+  color: black;
+  box-shadow: 0 0 15px darkblue;
 }
 
-#home-challenges ul {
+#mission {
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  background-color: #f0f0f0;
+  border-radius: 15px;
+  width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: baskerville;
+}
+
+#mission h2 {
+  font-size: 1.75rem;
+  font-family: copperplate;
+  margin-bottom: 20px;
+}
+
+#mission p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* Challenge List */
+#home-challenges {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+#home-challenges h2 {
+  align-self: flex-start; /* Aligns h2 to the left within the container */
+  margin-left: 8rem;
+  font-size: 2.5rem;
+  font-family: copperplate;
+}
+
+.few-challenges {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap; /* Makes it responsive on small screens */
+  gap: 1.5rem;
+  margin: 1rem auto;
   list-style: none;
   padding: 0;
-  border-radius: 10px;
-  background: #f3f3f3;
-  height: 130px;
-  width: 850px;
-  margin-bottom: 40px;
-}
-
-#home-challenges h2 {
-  font-size: 24px;
-  color: #333;
-  padding: 10px 10px 8px 17px;
-}
-
-/* Home Page */
-section#mission {
-  background-color: #f0f0f0;
-  padding: 20px;
-  width: 600px;
-}
-
-section#mission h2 {
-  font-size: 24px;
-  color: #333;
-  display: flex;
-  padding: 0 0 25px 0;
-}
-
-section#join {
-  background-color: #f0f0f0;
-  padding: 20px;
-  width: 600px;
-}
-
-section#join h1 {
-  font-size: 24px;
-  display: flex;
-  padding: 0 0 15px 0;
-}
-
-#join-btn {
-  padding: 10px 10px 10px 10px;
-  background: linear-gradient(90deg, #8b5cf6, #6366f1);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
-  margin: 80px 10px 10px 0px;
-}
-
-#join-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
-}
-
-#home-challenges ul {
-  display: flex;
-  gap: 1rem;
-  list-style: none;
-  padding: 1rem;
-  border-radius: 10px;
-  background: #f3f3f3;
-  max-width: 850px;
-  max-height: 150px;
-  margin: 0 auto 40px auto;
-  overflow-x: auto; /* Optional: make scrollable on smaller screens */
-}
-
-#home-challenges h2 {
-  font-size: 24px;
-  color: #333;
-  padding: 10px 10px 8px 17px;
-}
-
-.challenge-title {
-  font-size: 1.1rem;
+  max-width: 900px;
+  font-family: baskerville;
   font-weight: bold;
-  color: #444;
-  margin-bottom: 0.5rem;
 }
 
 .few-challenges li {
-  background-color: white;
-  border-radius: 8px;
-  flex: 1;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  height: 104px;
+  background: #fff;
+  border: 2px solid #eee;
+  border-radius: 15px;
+  width: 200px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.few-challenges p {
-  font-size: 0.95rem;
-  color: #666;
-  margin: 0;
+.few-challenges li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
 }

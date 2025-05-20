@@ -24,15 +24,15 @@ export default function HomePage() {
 
   return (
     <>
-      <section id="join">
+      <div id="join">
         <h1>Get Inspired Today!</h1>
         <p>Join a platform for challenges and goals. Share with the world.</p>
         <Link to="/sign-up">
           {" "}
           <button id="join-btn">Join Here</button>
         </Link>
-      </section>
-      <section id="mission">
+      </div>
+      <div id="mission">
         <h2>The Mission Behind the Motion</h2>
         <p>
           Mindful Motion is a platform to maximize teenagers’ productivity and
@@ -41,8 +41,8 @@ export default function HomePage() {
           on an app, but control the content being fed to them by only hosting
           projects and challenges to our users.
         </p>
-      </section>
-      <section id="home-challenges">
+      </div>
+      <div id="home-challenges">
         <h2>Dare to Begin...</h2>
         <ul className="few-challenges">
           {someChallengesData.slice(0, 4).map((chall) => (
@@ -59,7 +59,7 @@ export default function HomePage() {
             </li>
           ))}
         </ul>
-      </section>
+      </div>
     </>
   );
 }
