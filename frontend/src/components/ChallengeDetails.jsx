@@ -53,15 +53,13 @@ function ChallengeInfo() {
   return (
     <>
       <h2>{challenge.title}</h2>
+      <p>Description: {challenge.description}</p>
+      <p>Start Date: {challenge.created_at}</p>
+      <p>End: {challenge.end_time}</p>
+      <button onClick={handleJoin}>Join</button>
       <div className="challengeDetails">
         <p>
           <strong>Description:</strong> {challenge.description}
-        </p>
-        <p>
-          <strong>Contest:</strong> {challenge.contest ? "yes" : "no"}
-        </p>
-        <p>
-          <strong>Winner:</strong> {challenge.winner ? "yes" : "no"}
         </p>
         <p>
           <strong>Start Date:</strong> {challenge.created_at}
