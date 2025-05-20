@@ -1,3 +1,4 @@
+
 // module.exports = {
 //   env: {
 //     browser: true,
@@ -36,4 +37,5 @@
 //       { argsIgnorePattern: '_|(knex)', destructuredArrayIgnorePattern: '^_' },
 //     ],
 //   },
+
 // };
