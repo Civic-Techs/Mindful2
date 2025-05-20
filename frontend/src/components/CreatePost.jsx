@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
+import { addParticipant } from "../adapters/participants-adapter";
 
 export default function CreatePost({ onPostCreated, challengeId }) {
     const { currentUser } = useContext(CurrentUserContext);
@@ -42,22 +43,25 @@ export default function CreatePost({ onPostCreated, challengeId }) {
             const newPost = await response.json();
             if (onPostCreated) {
                 onPostCreated(newPost);
+
+                await addParticipant({ user_id: formData.user_id, challenge_id: formData.challenge_id });
             }
-            alert("Post created successfully!");
+
+            alert("Post created and you have joined the challenge!");
             setFormData({
                 title: "",
                 description: "",
                 img: "",
                 votes: 0,
                 user_id: currentUser?.id || "",
-                challenge_id: challengeId ? challengeId || ""
+                challenge_id: challengeId || ""
             });
             navigate("/posts");
         } catch (error) {
             console.error("Error creating post:", error);
             alert("An error occurred while creating the post.");
         }
-    }
+    };
 
     return (
         <form id="create-post" onSubmit={handleSubmit}>
