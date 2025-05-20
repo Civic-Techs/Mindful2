@@ -1,15 +1,18 @@
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import CurrentUserContext from "../contexts/current-user-context";
+import { Heading } from "@chakra-ui/react";
 
 export default function SiteHeadingAndNav() {
   const { currentUser } = useContext(CurrentUserContext);
 
   return (
     <header>
-      <a id="logo" href="/">
-        Mindful Motion
-      </a>
+      <Heading fontWeight={"bold"} size="4xl">
+        <a id="logo" href="/">
+          Mindful Motion
+        </a>
+      </Heading>
       <nav>
         <ul>
           <li>

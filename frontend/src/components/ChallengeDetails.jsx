@@ -1,9 +1,9 @@
-import { getChallengeId } from '../adapters/challengesFetch';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import { useEffect, useState, useContext } from 'react';
-import CurrentUserContext from '../contexts/current-user-context';
-import { fetchHandler, getPostOptions } from '../utils/fetchingUtils';
-import { addParticipant } from '../adapters/participants-adapter';
+import { getChallengeId } from "../adapters/challengesFetch";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import CurrentUserContext from "../contexts/current-user-context";
+import { fetchHandler, getPostOptions } from "../utils/fetchingUtils";
+import { addParticipant } from "../adapters/participants-adapter";
 
 function ChallengeInfo() {
   const { id } = useParams();
@@ -14,8 +14,8 @@ function ChallengeInfo() {
 
   const navigate = useNavigate();
   if (!currentUser) {
-    console.log('No current user, redirecting to login');
-    navigate('/login');
+    console.log("No current user, redirecting to login");
+    navigate("/login");
   }
 
   useEffect(() => {
@@ -23,18 +23,14 @@ function ChallengeInfo() {
       try {
         const [data, error] = await getChallengeId(id);
 
-        // CHECKING DATA
-        console.log('challenge:', data);
-        //CHECKING DATA
-
         if (error) {
-          console.error('Error fetching challenge:', error);
+          console.error("Error fetching challenge:", error);
           return;
         }
 
         setChallenge(data);
       } catch (error) {
-        console.error('Error fetching challenge:', error);
+        console.error("Error fetching challenge:", error);
       }
     };
     getChallengeInfo();
@@ -42,12 +38,12 @@ function ChallengeInfo() {
   const handleJoin = async () => {
     const user_id = currentUser.id;
     let challenge_id = Number(id);
-    console.log('user_id:', user_id);
-    console.log('challenge_id:', challenge_id);
+    console.log("user_id:", user_id);
+    console.log("challenge_id:", challenge_id);
 
     const [data, error] = await addParticipant({ user_id, challenge_id });
     if (error) {
-      console.error('Error adding participant:', error);
+      console.error("Error adding participant:", error);
       return;
     }
   };
@@ -61,10 +57,24 @@ function ChallengeInfo() {
       <p>Start Date: {challenge.created_at}</p>
       <p>End: {challenge.end_time}</p>
       <button onClick={handleJoin}>Join</button>
+      <div className="challengeDetails">
+        <p>
+          <strong>Description:</strong> {challenge.description}
+        </p>
+        <p>
+          <strong>Start Date:</strong> {challenge.created_at}
+        </p>
+        <p>
+          <strong>End:</strong> {challenge.end_time}
+        </p>
+      </div>
+      <div className="challengeActions">
+        <button onClick={handleJoin}>Join</button>
 
-      <Link to={'/challenges'}>
-        <button>Back to Challenges</button>
-      </Link>
+        <Link to={"/challenges"}>
+          <button>Back to Challenges</button>
+        </Link>
+      </div>
     </>
   );
 }

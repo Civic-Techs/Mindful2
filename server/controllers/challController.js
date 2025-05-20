@@ -1,6 +1,7 @@
 const Challenges = require('../models/Challenge');
 
 exports.createChallenge = async (req, res) => {
+  console.log(req.body);
   try {
     // Ensure the request body exists
     if (!req.body) {
@@ -34,6 +35,8 @@ exports.createChallenge = async (req, res) => {
       end_time,
       user_id,
     });
+
+    console.log(chall);
 
     req.session.challId = chall.id;
 
@@ -109,5 +112,3 @@ exports.getChallengeById = async (req, res) => {
       .send({ message: 'An error occurred while fetching the challenge.' });
   }
 };
-
-// exports.addParticipant = async (req, res) => {

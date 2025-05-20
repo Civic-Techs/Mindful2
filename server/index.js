@@ -28,7 +28,6 @@ app.use(express.json()); // parse incoming request bodies as JSON
 app.use(express.static(path.join(__dirname, '../frontend/dist'))); // Serve static assets from the dist folder of the frontend
 
 /// ////////////////////////////
-
 // Auth Routes
 /// ////////////////////////////
 
@@ -40,7 +39,6 @@ app.delete('/api/auth/logout', authControllers.logoutUser);
 /// ////////////////////////////
 // User Routes
 /// ////////////////////////////
-
 // These actions require users to be logged in (authentication)
 // Express lets us pass a piece of middleware to run for a specific endpoint
 app.get('/api/users', checkAuthentication, userControllers.listUsers);
@@ -50,6 +48,8 @@ app.patch('/api/users/:id', checkAuthentication, userControllers.updateUser);
 // For challenges
 app.get('/api/challenges', challControllers.getAllChallenges);
 app.get('/api/challenges/:id', challControllers.getChallengeById);
+//
+app.post('/api/challenges', challControllers.createChallenge);
 
 /// ////////////////////////////
 // Participant Routes
@@ -61,10 +61,10 @@ app.get(
   '/api/participants/:id',
   participantsControllers.getChallengeTitlesByUserId
 );
+
 /// ////////////////////////////
 // Fallback Routes
 /// ////////////////////////////
-
 // Requests meant for the API will be sent along to the router.
 // For all other requests, send back the index.html file in the dist folder.
 app.get('*', (req, res, next) => {
@@ -77,7 +77,6 @@ app.use(logErrors);
 /// ////////////////////////////
 // Start Listening
 /// ////////////////////////////
-
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
