@@ -1,3 +1,4 @@
+/* eslint-disable prefer-arrow-callback */
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
