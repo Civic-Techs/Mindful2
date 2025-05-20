@@ -1,15 +1,11 @@
-import { useContext, useEffect } from 'react';
+// import { useContext, useEffect } from "react";
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import SignUpPage from './pages/SignUp';
 import LoginPage from './pages/Login';
 import SiteHeadingAndNav from './components/SiteHeadingAndNav';
 import NotFoundPage from './pages/NotFound';
-// import UserContext from "./contexts/current-user-context";
-// import { checkForLoggedInUser } from "./adapters/auth-adapter";
-//import UserProfile from "./pages/UserProfile";
 import UserPage from './pages/User';
-//import UserProfile from "./pages/UserProfile";
 import ChallengesPage from './pages/Challenges';
 import ChallengeInfo from './components/ChallengeDetails';
 import '../src/styles/App.css';

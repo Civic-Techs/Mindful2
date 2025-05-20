@@ -1,8 +1,8 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable comma-dangle */
 /* eslint-disable default-param-last */
-const knex = require('../db/knex');
-const bcrypt = require('bcrypt');
+const knex = require("../db/knex");
+const bcrypt = require("bcrypt");
 const SALT_ROUNDS = 12;
 
 class User {
@@ -14,8 +14,8 @@ class User {
     id,
     name,
     dob,
-    bio = '',
-    profile_img = '',
+    bio = "",
+    profile_img = "",
     email,
     username,
     password_hash,
@@ -40,8 +40,8 @@ class User {
   static async create(
     name,
     dob,
-    bio = '',
-    profile_img = '',
+    bio = "",
+    profile_img = "",
     email,
     username,
     password
@@ -95,20 +95,20 @@ class User {
 
   // Updates the user that matches the given id with a new username.
   // Returns the modified user, using the constructor to hide the passwordHash.
-  static async update(id, username) {
+  static async update(id, username, bio) {
     const query = `
       UPDATE users
-      SET username=?
+      SET username=?, bio=?
       WHERE id=?
       RETURNING *
     `;
-    const result = await knex.raw(query, [username, id]);
+    const result = await knex.raw(query, [username, bio, id]);
     const rawUpdatedUser = result.rows[0];
     return rawUpdatedUser ? new User(rawUpdatedUser) : null;
   }
 
   static async deleteAll() {
-    return knex('users').del();
+    return knex("users").del();
   }
 }
 
