@@ -1,7 +1,7 @@
 import { allChallenges } from "../adapters/challengesFetch";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import CreateChallenge from "@/components/CreateChallenge";
+// import CreateChallenge from "@/components/CreateChallenge";
 
 function ChallengesPage() {
   const [allChallengesData, setAllChallengesData] = useState([]);
