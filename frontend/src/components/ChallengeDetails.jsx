@@ -1,21 +1,19 @@
-import { getChallengeId } from "../adapters/challengesFetch";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
-import CurrentUserContext from "../contexts/current-user-context";
-import { fetchHandler, getPostOptions } from "../utils/fetchingUtils";
-import { addParticipant } from "../adapters/participants-adapter";
+import { getChallengeId } from '../adapters/challengesFetch';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useEffect, useState, useContext } from 'react';
+import CurrentUserContext from '../contexts/current-user-context';
+import { addParticipant } from '../adapters/participants-adapter';
 
 function ChallengeInfo() {
   const { id } = useParams();
   const [challenge, setChallenge] = useState(null);
+  const [showComments, setShowComments] = useState(false); // State to toggle comment section
+  const [isJoined, setIsJoined] = useState(false); // State to track if user has joined
   const { currentUser } = useContext(CurrentUserContext);
-
-  console.log({ currentUser });
 
   const navigate = useNavigate();
   if (!currentUser) {
-    console.log("No current user, redirecting to login");
-    navigate("/login");
+    navigate('/login');
   }
 
   useEffect(() => {
@@ -24,27 +22,42 @@ function ChallengeInfo() {
         const [data, error] = await getChallengeId(id);
 
         if (error) {
-          console.error("Error fetching challenge:", error);
+          console.error('Error fetching challenge:', error);
           return;
         }
 
         setChallenge(data);
       } catch (error) {
-        console.error("Error fetching challenge:", error);
+        console.error('Error fetching challenge:', error);
       }
     };
     getChallengeInfo();
   }, [id]);
+
   const handleJoin = async () => {
     const user_id = currentUser.id;
     let challenge_id = Number(id);
-    console.log("user_id:", user_id);
-    console.log("challenge_id:", challenge_id);
 
-    const [data, error] = await addParticipant({ user_id, challenge_id });
-    if (error) {
-      console.error("Error adding participant:", error);
-      return;
+    if (isJoined) {
+      // Unjoin logic
+      const [data, error] = await removeParticipant({ user_id, challenge_id });
+      if (error) {
+        console.error('Error removing participant:', error);
+        return;
+      }
+
+      setIsJoined(false); // Mark as unjoined
+      setShowComments(false); // Hide comment section
+    } else {
+      // Join logic
+      const [data, error] = await addParticipant({ user_id, challenge_id });
+      if (error) {
+        console.error('Error adding participant:', error);
+        return;
+      }
+
+      setIsJoined(true); // Mark as joined
+      setShowComments(true); // Show comment section
     }
   };
 
@@ -56,7 +69,9 @@ function ChallengeInfo() {
       <p>Description: {challenge.description}</p>
       <p>Start Date: {challenge.created_at}</p>
       <p>End: {challenge.end_time}</p>
-      <button onClick={handleJoin}>Join</button>
+      <button onClick={handleJoin}>
+        {isJoined ? 'Joined (Click to Unjoin)' : 'Join'}
+      </button>
       <div className="challengeDetails">
         <p>
           <strong>Description:</strong> {challenge.description}
@@ -69,12 +84,27 @@ function ChallengeInfo() {
         </p>
       </div>
       <div className="challengeActions">
-        <button onClick={handleJoin}>Join</button>
-
-        <Link to={"/challenges"}>
+        <Link to={'/challenges'}>
           <button>Back to Challenges</button>
         </Link>
       </div>
+
+      {/* Comment Section */}
+      {showComments && (
+        <div className="commentSection">
+          <h3>Comments</h3>
+          <textarea
+            placeholder="Write a comment..."
+            rows="4"
+            cols="50"
+          ></textarea>
+          <button>Submit Comment</button>
+          {/* Placeholder for displaying comments */}
+          <div className="commentsList">
+            <p>No comments yet. Be the first to comment!</p>
+          </div>
+        </div>
+      )}
     </>
   );
 }

@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 
+
 export default function CreatePost({ onPostCreated, challengeId }) {
     const { currentUser } = useContext(CurrentUserContext);
     const [formData, setFormData] = useState({

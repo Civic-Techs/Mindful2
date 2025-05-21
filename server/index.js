@@ -20,6 +20,7 @@ const userControllers = require('./controllers/userControllers');
 const app = express();
 const challControllers = require('./controllers/challController');
 const participantsControllers = require('./controllers/participantsControllers');
+const commentsControllers = require('./controllers/commentControllers');
 
 // middleware
 app.use(handleCookieSessions); // adds a session property to each request representing the cookie
@@ -61,6 +62,11 @@ app.get(
   '/api/participants/:id',
   participantsControllers.getChallengeTitlesByUserId
 );
+
+/// ////////////////////////////
+// Comments Routes
+/// ////////////////////////////
+app.post('/api/comments', commentsControllers.createComment);
 
 /// ////////////////////////////
 // Fallback Routes
