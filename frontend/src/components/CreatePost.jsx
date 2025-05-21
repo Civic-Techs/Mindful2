@@ -66,6 +66,32 @@ export default function CreatePost({ onPostCreated }) {
       console.error("Error creating post:", error);
       alert("An error occurred while creating the post.");
 
+     
+                await addParticipant({ user_id: formData.user_id, challenge_id: formData.challenge_id });
+
+                try {
+                    await addParticipant({ user_id: formData.user_id, challenge_id: formData.challenge_id });
+                } catch (error) {
+                    console.error("Error adding participant:", error);
+                    return;
+                }
+            }
+
+            alert("Post created and you have joined the challenge!");
+            setFormData({
+                title: "",
+                description: "",
+                img: "",
+                votes: 0,
+                user_id: currentUser?.id || "",
+                challenge_id: challengeId || ""
+            });
+            navigate("/posts");
+        } catch (error) {
+            console.error("Error creating post:", error);
+            alert("An error occurred while creating the post.");
+        }
+    };
             
     }
   };
@@ -99,4 +125,3 @@ export default function CreatePost({ onPostCreated }) {
     </form>
   );
 }
-
