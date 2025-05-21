@@ -18,7 +18,6 @@ exports.createComment = async (req, res) => {
         message: 'Content is required.',
       });
     }
-    console.log(req.body);
 
     const comment = await Comment.create({
       content,
@@ -27,7 +26,6 @@ exports.createComment = async (req, res) => {
       parent_comment_id,
     });
     // console.log(comment);
-    console.log(req.session);
     req.session.commentId = comment.id;
 
     return res.status(200).send({

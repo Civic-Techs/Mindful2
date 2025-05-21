@@ -10,7 +10,7 @@ class Comment {
 
   static async create({
     content = '',
-    post_id = 0,
+    post_id,
     user_id,
     parent_comment_id = null,
   }) {
@@ -88,6 +88,9 @@ class Comment {
     return rows[0] ? new Comment(rows[0]) : null;
   }
 
+  static async deleteAll() {
+    return knex('comments').del();
+  }
   static async deleteAll() {
     return knex('comments').del();
   }

@@ -51,6 +51,7 @@ exports.createChallenge = async (req, res) => {
     });
   } catch (error) {
     console.error('Error creating challenge: ', error);
+    console.error('Error creating challenge: ', error);
     return res
       .status(500)
       .send({ message: 'An error occurred while registering the challenge.' });
