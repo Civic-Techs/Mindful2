@@ -1,27 +1,28 @@
 /* eslint-disable comma-dangle */
 /// ////////////////////////////
-// Imports
+// Imports /////////////////////
 /// ////////////////////////////
-
 require("dotenv").config();
 const path = require("path");
 const express = require("express");
 
-// middleware imports
+// ------> middleware imports
 const handleCookieSessions = require("./middleware/handleCookieSessions");
 const checkAuthentication = require("./middleware/checkAuthentication");
 const logRoutes = require("./middleware/logRoutes");
 const logErrors = require("./middleware/logErrors");
 
-// controller imports
+// ------> controller imports
 const authControllers = require("./controllers/authControllers");
 const userControllers = require("./controllers/userControllers");
-
 const app = express();
 const challControllers = require("./controllers/challController");
 const participantsControllers = require("./controllers/participantsControllers");
+const postsControllers = require("./controllers/postControllers");
 
-// middleware
+/// ////////////////////////////
+// Middleware //////////////////
+/// ////////////////////////////
 app.use(handleCookieSessions); // adds a session property to each request representing the cookie
 app.use(logRoutes); // print information about each incoming request
 app.use(express.json()); // parse incoming request bodies as JSON
@@ -49,6 +50,16 @@ app.patch("/api/users/:id", checkAuthentication, userControllers.updateUser);
 app.get("/api/challenges", challControllers.getAllChallenges);
 app.get("/api/challenges/:id", challControllers.getChallengeById);
 app.post("/api/challenges", challControllers.createChallenge);
+app.post(
+  "/api/challenges/:challengeId/posts",
+
+  postsControllers.createPost
+);
+app.get("/api/challenges/posts", postsControllers.getAllPosts);
+app.get(
+  "/api/challenges/:challengeId/posts",
+  postsControllers.getPostByChallengeId
+);
 
 /// ////////////////////////////
 // Participant Routes
