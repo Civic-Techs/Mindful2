@@ -1,4 +1,4 @@
-const knex = require("../db/knex");
+const knex = require('../db/knex');
 
 class Comment {
   constructor({ content, post_id, user_id, parent_comment_id }) {
@@ -8,7 +8,12 @@ class Comment {
     this.parent_comment_id = parent_comment_id;
   }
 
-  static async create({ content = "", post_id, user_id, parent_comment_id }) {
+  static async create({
+    content = '',
+    post_id,
+    user_id,
+    parent_comment_id = null,
+  }) {
     const query = `
             INSERT INTO comments (content, post_id, user_id, parent_comment_id)
             VALUES (?, ?, ?, ?)
@@ -84,7 +89,10 @@ class Comment {
   }
 
   static async deleteAll() {
-    return knex("comments").del();
+    return knex('comments').del();
+  }
+  static async deleteAll() {
+    return knex('comments').del();
   }
 }
 

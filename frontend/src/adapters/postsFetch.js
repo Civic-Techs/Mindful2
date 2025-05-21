@@ -1,6 +1,6 @@
-import { fetchHandler, getPostOptions } from "../utils/fetchingUtils";
+import { fetchHandler, getPostOptions } from '../utils/fetchingUtils';
 
-const baseUrl = "/api/challenges";
+const baseUrl = '/api/challenges';
 
 export const createPost = async (id, postData) => {
   return await fetchHandler(`${baseUrl}/${id}/posts`, getPostOptions(postData));

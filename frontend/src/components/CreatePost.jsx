@@ -1,15 +1,15 @@
-import { useState, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import CurrentUserContext from "../contexts/current-user-context";
-import { createPost } from "../adapters/postsFetch";
+import { useState, useContext } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import CurrentUserContext from '../contexts/current-user-context';
+import { createPost } from '../adapters/postsFetch';
 
 export default function CreatePost({ onPostCreated }) {
   const { currentUser } = useContext(CurrentUserContext);
   const { id } = useParams();
   const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    img: "",
+    title: '',
+    description: '',
+    img: '',
     votes: 0,
     is_winner: false,
     user_id: currentUser?.id || null,
@@ -19,7 +19,7 @@ export default function CreatePost({ onPostCreated }) {
   const navigate = useNavigate();
 
   if (!currentUser) {
-    navigate("/login");
+    navigate('/login');
     return null;
   }
 
@@ -27,7 +27,7 @@ export default function CreatePost({ onPostCreated }) {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type === 'checkbox' ? checked : value,
     });
   };
 
@@ -43,30 +43,28 @@ export default function CreatePost({ onPostCreated }) {
         ...formData,
         user_id: currentUser.id,
       });
-      console.log("Response", newPost);
+      console.log('Response', newPost);
 
       if (!newPost) {
-        throw new Error("Failed to create post.");
+        throw new Error('Failed to create post.');
       }
 
       if (onPostCreated) {
         onPostCreated(newPost);
       }
-      alert("Post created successfully!");
+      alert('Post created successfully!');
       setFormData({
-        title: "",
-        description: "",
-        img: "",
+        title: '',
+        description: '',
+        img: '',
         votes: 0,
         is_winner: false,
       });
 
       navigate(`/challenges/${id}`);
     } catch (error) {
-      console.error("Error creating post:", error);
-      alert("An error occurred while creating the post.");
-
-            
+      console.error('Error creating post:', error);
+      alert('An error occurred while creating the post.');
     }
   };
 
@@ -99,4 +97,3 @@ export default function CreatePost({ onPostCreated }) {
     </form>
   );
 }
-
