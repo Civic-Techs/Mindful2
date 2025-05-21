@@ -65,6 +65,8 @@ export default function CreatePost({ onPostCreated }) {
     } catch (error) {
       console.error("Error creating post:", error);
       alert("An error occurred while creating the post.");
+
+            
     }
   };
 
@@ -97,3 +99,4 @@ export default function CreatePost({ onPostCreated }) {
     </form>
   );
 }
+
