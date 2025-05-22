@@ -170,3 +170,29 @@ exports.getPostByChallengeId = async (req, res) => {
     });
   }
 };
+
+exports.deletePost = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    console.log("Deleting post with ID:", id);
+
+    const deletedPost = await Post.delete(id);
+
+    if (!deletedPost) {
+      return res.status(404).send({
+        message: "Post not found.",
+      });
+    }
+
+    return res.status(200).send({
+      message: "Post deleted successfully.",
+      post: deletedPost,
+    });
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    return res.status(500).send({
+      message: "An error occurred while deleting the post.",
+    });
+  }
+};

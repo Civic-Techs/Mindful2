@@ -59,6 +59,7 @@ app.get(
 );
 // Get single post by id
 app.get("/api/challenges/posts/:id", postsControllers.getPostById);
+app.delete("/api/challenges/posts/:id", postsControllers.deletePost);
 
 /// ////////////////////////////
 // Participant Routes

@@ -4,7 +4,7 @@ import { useEffect, useState, useContext } from "react";
 import CurrentUserContext from "../contexts/current-user-context";
 // import { fetchHandler, getPostOptions } from '../utils/fetchingUtils';
 // import { addParticipant } from "../adapters/participants-adapter";
-import { getPostsByChallengeId } from "../adapters/postsFetch";
+import { getPostsByChallengeId, deletePost } from "../adapters/postsFetch";
 import { getCommentsByPostId, getAllComments } from "../adapters/commentsFetch"; // Import API functions
 import CommentsSection from "./CommentsSection"; // Import CommentsSection component
 
@@ -93,6 +93,17 @@ function ChallengeInfo() {
     }
   }, [posts]);
 
+  const handleDeletePost = async (postId) => {
+    try {
+      await deletePost(postId);
+      setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+      alert("Post deleted successfully.");
+    } catch (error) {
+      console.error("Failed to delete post:", error);
+      alert("Failed to delete post.");
+    }
+  };
+
   if (!challenge) return <p>Loading...</p>;
 
   return (
@@ -137,6 +148,12 @@ function ChallengeInfo() {
               <p>{post.description}</p>
               {post.img && <img src={post.img} alt={post.title} width="200" />}
               <p>Votes: {post.votes}</p>
+              {/* Delete button */}
+              {post.user_id === currentUser?.id && (
+                <button onClick={() => handleDeletePost(post.id)}>
+                  Delete Post
+                </button>
+              )}
               <CommentsSection postId={post.id} currentUser={currentUser} />
             </li>
           ))}
