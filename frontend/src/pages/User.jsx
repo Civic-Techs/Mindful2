@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import CurrentUserContext from "../contexts/current-user-context";
-import { getUser } from "../adapters/user-adapter";
-import { logUserOut } from "../adapters/auth-adapter";
-import UpdateUsernameForm from "../components/UpdateUsernameForm";
-import { getChallengeTitlesByUserId } from "../adapters/participants-adapter";
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import CurrentUserContext from '../contexts/current-user-context';
+import { getUser } from '../adapters/user-adapter';
+import { logUserOut } from '../adapters/auth-adapter';
+import UpdateUsernameForm from '../components/UpdateUsernameForm';
+import { getChallengeTitlesByUserId } from '../adapters/participants-adapter';
 
 export default function UserPage() {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ export default function UserPage() {
   const handleLogout = async () => {
     logUserOut();
     setCurrentUser(null);
-    navigate("/");
+    navigate('/');
   };
 
   if (!userProfile) return null;
@@ -56,7 +56,7 @@ export default function UserPage() {
                 Logout
               </button>
               <button id="update-btn" onClick={() => setShowForm(!showForm)}>
-                {showForm ? "Cancel Edit" : "Update Profile"}
+                {showForm ? 'Cancel Edit' : 'Update Profile'}
               </button>
               {showForm && (
                 <UpdateUsernameForm
@@ -66,28 +66,28 @@ export default function UserPage() {
               )}
             </>
           ) : (
-            ""
+            ''
           )}
         </div>
 
         <div className="rightPanel" id="userInfo">
           <p>
-            <strong>Birthday:</strong> {userProfile.dob || "Not provided yet"}
+            <strong>Birthday:</strong> {userProfile.dob || 'Not provided yet'}
           </p>
           <p>
-            <strong>Bio:</strong> {profileBio || "No bio yet!"}
+            <strong>Bio:</strong> {profileBio || 'No bio yet!'}
           </p>
           <h3>
             <strong>Challenges Joined</strong>
           </h3>
-          <ul>
+          <ul className="challengeTitleList">
             {challengeTitles
               ? challengeTitles.map((chall, index) => (
                   <li key={chall.challenge_id ?? index}>
                     <p>{chall.title}</p>
                   </li>
                 ))
-              : "No challenges joined :("}
+              : 'No challenges joined :('}
           </ul>
         </div>
       </div>
