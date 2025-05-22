@@ -22,3 +22,14 @@ export const getAllComments = async () => {
   const url = "/api/comments";
   return await fetchHandler(url, basicFetchOptions);
 };
+
+export const deleteComment = async (commentId) => {
+  const url = `/api/comments/${commentId}`;
+  const options = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  return await fetchHandler(url, options);
+};

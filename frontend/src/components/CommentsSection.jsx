@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { addComment, getCommentsByPostId } from "../adapters/commentsFetch";
+import {
+  addComment,
+  getCommentsByPostId,
+  deleteComment,
+} from "../adapters/commentsFetch";
 import CurrentUserContext from "../contexts/current-user-context";
 import { getUserById } from "../adapters/user-adapter"; // Import the function to get user by ID
 
@@ -75,6 +79,23 @@ const CommentsSection = ({ postId }) => {
     }
   };
 
+  const handleDeleteComment = async (commentId) => {
+    try {
+      const [response, error] = await deleteComment(commentId);
+      if (error) {
+        console.error("Error deleting comment:", error);
+        return;
+      }
+
+      // Remove the deleted comment from the state
+      setComments((prevComments) =>
+        prevComments.filter((comment) => comment.id !== commentId)
+      );
+    } catch (error) {
+      console.error("Error deleting comment:", error);
+    }
+  };
+
   return (
     <div className="comments-section">
       <h5>Comments:</h5>
@@ -83,6 +104,14 @@ const CommentsSection = ({ postId }) => {
           comments.map((comment, index) => (
             <li key={`${comment.id}-${index}`}>
               <strong>{`${comment.user?.username}`}</strong> {comment.content}
+              {currentUser?.id === comment.user_id && ( // Show delete button only for the comment owner
+                <button
+                  onClick={() => handleDeleteComment(comment.id)}
+                  style={{ marginLeft: "10px", color: "red" }}
+                >
+                  Delete
+                </button>
+              )}
             </li>
           ))
         ) : (

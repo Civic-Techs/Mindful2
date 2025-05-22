@@ -74,10 +74,12 @@ app.get(
 /// ////////////////////////////
 // Comments Routes
 /// ////////////////////////////
+
 app.post("/api/comments", commentsControllers.createComment);
 app.get("/api/comments", commentsControllers.getAllComments);
 app.get("/api/comments/:id", commentsControllers.getCommentById);
 app.get("/api/comments/post/:post_id", commentsControllers.getCommentsByPostId);
+app.delete("/:id", commentsControllers.deleteComment);
 
 /// ////////////////////////////
 // Fallback Routes

@@ -1,13 +1,13 @@
-const Comment = require('../models/Comment');
-const Post = require('../models/Post');
-const User = require('../models/User');
+const Comment = require("../models/Comment");
+const Post = require("../models/Post");
+const User = require("../models/User");
 
 exports.createComment = async (req, res) => {
   console.log(req.body);
   try {
     if (!req.body) {
       return res.status(400).send({
-        message: 'Response body is required.',
+        message: "Response body is required.",
       });
     }
 
@@ -15,7 +15,7 @@ exports.createComment = async (req, res) => {
 
     if (!content) {
       return res.status(400).send({
-        message: 'Content is required.',
+        message: "Content is required.",
       });
     }
 
@@ -36,9 +36,9 @@ exports.createComment = async (req, res) => {
       parent_comment_id: comment.parent_comment_id,
     });
   } catch (error) {
-    console.error('Error creating comment: ', error);
+    console.error("Error creating comment: ", error);
     return res.status(500).send({
-      message: 'An error occurred while registering the comment.',
+      message: "An error occurred while registering the comment.",
     });
   }
 };
@@ -55,17 +55,17 @@ exports.updateComment = async (req, res) => {
 
     if (!updatedComment) {
       return res.status(404).send({
-        message: 'Error: comment not found.',
+        message: "Error: comment not found.",
       });
     }
 
     return res.status(200).send({
-      message: 'Comment updated successfully.',
+      message: "Comment updated successfully.",
     });
   } catch (error) {
-    console.error('Error updating comment: ', error);
+    console.error("Error updating comment: ", error);
     return res.status(500).send({
-      message: 'An error occurred while updating the comment.',
+      message: "An error occurred while updating the comment.",
     });
   }
 };
@@ -77,9 +77,9 @@ exports.getAllComments = async (req, res) => {
       comments: getComments,
     });
   } catch (error) {
-    console.error('Error fetching comments: ', error);
+    console.error("Error fetching comments: ", error);
     return res.status(500).send({
-      message: 'An error occurred while fetching comments.',
+      message: "An error occurred while fetching comments.",
     });
   }
 };
@@ -90,15 +90,15 @@ exports.getCommentById = async (req, res) => {
     const commentId = await Comment.find(id);
     if (!commentId) {
       return res.status(404).send({
-        message: 'Comment not found.',
+        message: "Comment not found.",
       });
     }
 
     return res.status(200).send(commentId);
   } catch (error) {
-    console.error('Error fetching comment by ID: ', error);
+    console.error("Error fetching comment by ID: ", error);
     return res.status(500).send({
-      message: 'An error occurred while fetching the comment.',
+      message: "An error occurred while fetching the comment.",
     });
   }
 };
@@ -109,14 +109,14 @@ exports.getCommentsByUserId = async (req, res) => {
     const user = await User.find(user_id);
     if (!user) {
       return res.status(400).send({
-        message: 'User ID is missing.',
+        message: "User ID is missing.",
       });
     }
 
     const comments = await Comment.findByUser(user_id);
     if (!comments) {
       return res.status(404).send({
-        message: 'No comments found for this user.',
+        message: "No comments found for this user.",
       });
     }
 
@@ -124,9 +124,9 @@ exports.getCommentsByUserId = async (req, res) => {
       comments,
     });
   } catch (error) {
-    console.error('Error fetching comments: ', error);
+    console.error("Error fetching comments: ", error);
     return res.status(500).send({
-      message: 'An error occurred while fetching comments.',
+      message: "An error occurred while fetching comments.",
     });
   }
 };
@@ -137,14 +137,14 @@ exports.getCommentsByPostId = async (req, res) => {
     const post = await Post.find(post_id);
     if (!post) {
       return res.status(400).send({
-        message: 'Post ID is missing.',
+        message: "Post ID is missing.",
       });
     }
 
     const comments = await Comment.findByPost(post_id);
     if (!comments) {
       return res.status(404).send({
-        message: 'No comments found for this post.',
+        message: "No comments found for this post.",
       });
     }
 
@@ -152,9 +152,31 @@ exports.getCommentsByPostId = async (req, res) => {
       comments,
     });
   } catch (error) {
-    console.error('Error fetching comments: ', error);
+    console.error("Error fetching comments: ", error);
     return res.status(500).send({
-      message: 'An error occurred while fetching comments.',
+      message: "An error occurred while fetching comments.",
+    });
+  }
+};
+
+exports.deleteComment = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deletedComment = await Comment.delete({ id });
+    if (!deletedComment) {
+      return res.status(404).send({
+        message: "Comment not found.",
+      });
+    }
+
+    return res.status(200).send({
+      message: "Comment deleted successfully.",
+    });
+  } catch (error) {
+    console.error("Error deleting comment: ", error);
+    return res.status(500).send({
+      message: "An error occurred while deleting the comment.",
     });
   }
 };
