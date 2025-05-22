@@ -17,13 +17,7 @@ exports.createPost = async (req, res) => {
 
     const user_id = req.session.userId;
 
-    console.log("User ID: ", user_id);
-
-    // if (!user_id) {
-    //   return res.status(401).send({
-    //     message: "You must be logged in to create a post.",
-    //   });
-    // }
+    console.log("User ID (server):", user_id);
 
     if (!title) {
       return res.status(400).send({
