@@ -1,12 +1,16 @@
-import { getChallengeId } from "../adapters/challengesFetch";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
-import CurrentUserContext from "../contexts/current-user-context";
-// import { fetchHandler, getPostOptions } from '../utils/fetchingUtils';
-// import { addParticipant } from "../adapters/participants-adapter";
-import { getPostsByChallengeId } from "../adapters/postsFetch";
-import { getCommentsByPostId, getAllComments } from "../adapters/commentsFetch"; // Import API functions
-import CommentsSection from "./CommentsSection"; // Import CommentsSection component
+import { getChallengeId } from '../adapters/challengesFetch';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useEffect, useState, useContext } from 'react';
+import CurrentUserContext from '../contexts/current-user-context';
+import { fetchHandler, getPostOptions } from '../utils/fetchingUtils';
+import {
+  addParticipant,
+  getParticipantById,
+} from '../adapters/participants-adapter';
+import { getPostsByChallengeId } from '../adapters/postsFetch';
+import { getCommentsByPostId, getAllComments } from '../adapters/commentsFetch'; // Import API functions
+import CommentsSection from './CommentsSection'; // Import CommentsSection component
+import { use } from 'react';
 
 function ChallengeInfo() {
   const { id } = useParams();
@@ -19,7 +23,7 @@ function ChallengeInfo() {
 
   const navigate = useNavigate();
   if (!currentUser) {
-    navigate("/login");
+    navigate('/login');
   }
 
   useEffect(() => {
@@ -28,17 +32,44 @@ function ChallengeInfo() {
         const [data, error] = await getChallengeId(id);
 
         if (error) {
-          console.error("Error fetching challenge:", error);
+          console.error('Error fetching challenge:', error);
           return;
         }
 
         setChallenge(data);
       } catch (error) {
-        console.error("Error fetching challenge:", error);
+        console.error('Error fetching challenge:', error);
       }
     };
     getChallengeInfo();
   }, [id]);
+
+  useEffect(() => {
+    const checkIfJoined = async () => {
+      try {
+        const participants = await getParticipantById(currentUser.id);
+        const isParticipant = participants.some(
+          (participant) => participant.challenge_id === Number(id)
+        );
+        setIsJoined(isParticipant);
+      } catch (error) {
+        console.error('Error checking participant:', error);
+      }
+    };
+    checkIfJoined();
+  }, [currentUser, id]);
+
+  const handleJoin = async () => {
+    try {
+      await addParticipant({
+        user_id: currentUser.id,
+        challenge_id: id,
+      });
+      setIsJoined(true);
+    } catch (error) {
+      console.error('Error joining challenge:', error);
+    }
+  };
 
   useEffect(() => {
     const herePosts = async () => {
@@ -46,7 +77,7 @@ function ChallengeInfo() {
         const [data, error] = await getPostsByChallengeId(id);
 
         if (error) {
-          console.error("Error fetching posts:", error);
+          console.error('Error fetching posts:', error);
           return;
         }
         setPosts(data.posts);
@@ -59,7 +90,7 @@ function ChallengeInfo() {
         }
         setComments(commentsData);
       } catch (error) {
-        console.error("Error fetching posts:", error);
+        console.error('Error fetching posts:', error);
       }
     };
     herePosts();
@@ -70,7 +101,7 @@ function ChallengeInfo() {
       try {
         const [allComments, error] = await getAllComments();
         if (error) {
-          console.error("Error fetching all comments:", error);
+          console.error('Error fetching all comments:', error);
           return;
         }
 
@@ -84,7 +115,7 @@ function ChallengeInfo() {
 
         setComments(filteredComments);
       } catch (error) {
-        console.error("Error fetching all comments:", error);
+        console.error('Error fetching all comments:', error);
       }
     };
 
@@ -115,11 +146,20 @@ function ChallengeInfo() {
         <Link to={`/challenges/${challenge.id}/posts`}>
           <button>Posts</button>
         </Link>
-        <Link to={"/challenges"}>
+        <Link to={'/challenges'}>
           <button>Back to Challenges</button>
         </Link>
         <Link>
-          <button>{isJoined ? "Joined (Click to Unjoin)" : "Join"}</button>
+          <button
+            onClick={handleJoin}
+            disabled={isJoined} // Disable the button if the user is already a participant
+            style={{
+              backgroundColor: isJoined ? 'grey' : '#007bff',
+              cursor: isJoined ? 'not-allowed' : 'pointer',
+            }}
+          >
+            {isJoined ? 'Already Joined' : 'Join'}
+          </button>
         </Link>
       </div>
 
