@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import CurrentUserContext from '../contexts/current-user-context';
 import { createPost } from '../adapters/postsFetch';
+import UploadForm from './UploadForm';
 
 export default function CreatePost({ onPostCreated }) {
   const { currentUser } = useContext(CurrentUserContext);
@@ -29,6 +30,14 @@ export default function CreatePost({ onPostCreated }) {
       ...formData,
       [name]: type === 'checkbox' ? checked : value,
     });
+  };
+
+  const handleImageUpload = (imageUrl) => {
+    // Update the formData with the uploaded image URL
+    setFormData((prevData) => ({
+      ...prevData,
+      img: imageUrl,
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -86,14 +95,19 @@ export default function CreatePost({ onPostCreated }) {
         value={formData.description}
         onChange={handleChange}
       />
-      <label>Image URL:</label>
-      <input
-        type="text"
-        name="img"
-        value={formData.img}
-        onChange={handleChange}
-      />
-      <button type="submit">Create Post</button>
+
+      <label>Upload Image:</label>
+      {/* Replace the Image URL input with the UploadForm */}
+      <UploadForm onUpload={handleImageUpload} />
+      {formData.img && (
+        <>
+          <div>
+            <p>Uploaded Image:</p>
+            <img src={formData.img} alt="Uploaded Preview" width="200" />
+          </div>
+          <button type="submit">Create Post</button>
+        </>
+      )}
     </form>
   );
 }

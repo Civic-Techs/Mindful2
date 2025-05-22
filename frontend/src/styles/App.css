@@ -54,6 +54,13 @@
   transition: left 0.4s ease;
 }
 
+#create-btn-container {
+  display: flex; /* Enable Flexbox */
+  justify-content: center; /* Center the button horizontally */
+  align-items: center; /* Center the button vertically */
+  margin: 1rem auto; /* Optional: Add some margin for spacing */
+}
+
 #join-btn:hover::before {
   left: 0;
 }
@@ -102,11 +109,14 @@
   padding: 2rem;
 }
 
-#home-challenges h2 {
-  align-self: flex-start; /* Aligns h2 to the left within the container */
-  margin-left: 12.8rem;
-  font-size: 2.5rem;
-  font-family: Quicksand;
+#home-challenges {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Horizontally center the content */
+  justify-content: center; /* Vertically center the content */
+  height: 100vh; /* Make the container take the full height of the viewport */
+  padding: 2rem;
+  text-align: center; /* Center-align the text */
 }
 
 .few-challenges h3 {
