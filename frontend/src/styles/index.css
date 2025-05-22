@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600&display=swap');
 
 /* 1. Define default (light) variables */
 :root {
@@ -25,7 +25,7 @@
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: var(--background);
   color: var(--text);
   margin: 0;
@@ -36,7 +36,7 @@ h2,
 h3,
 nav,
 #logo {
-  font-family: "Quicksand", sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
 h2 {
@@ -55,7 +55,7 @@ button,
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 600;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
   transition: background 0.3s ease, transform 0.2s ease;
@@ -104,7 +104,7 @@ form {
   max-width: 400px;
   background: var(--background);
   border: 1px solid var(--form-border);
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   border-radius: 10px;
 }
 
@@ -141,7 +141,7 @@ form {
   text-decoration: underline;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
+input[type='date']::-webkit-calendar-picker-indicator {
   filter: invert(1); /* inverts the calendar icon for dark mode */
 }
 
@@ -168,7 +168,7 @@ header {
   align-items: center;
   padding: 1rem 2rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 #logo {
@@ -229,7 +229,7 @@ h1 {
 /* User profile */
 .userHeader {
   display: flex;
-  flex-direction: row;
+  /* flex-direction: column; */
   justify-content: space-evenly;
   align-items: center;
   min-height: 600px;
@@ -246,13 +246,38 @@ h1 {
 .rightPanel {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+  flex-wrap: wrap;
   justify-content: center; /* or space-between */
   align-items: flex-start;
-  min-height: 400px; /* Adjust as needed for your layout */
+  min-height: 100px; /* Adjust as needed for your layout */
 }
 .rightPanel h3,
 p {
   font-size: 20px;
+}
+
+.challengeTitleList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 1rem;
+  max-height: 300px; /* Set a fixed height for the scrollable area */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding-right: 0.5rem; /* Add some padding for better spacing */
+}
+
+.challengeTitleList::-webkit-scrollbar {
+  width: 8px; /* Customize scrollbar width */
+}
+
+.challengeTitleList::-webkit-scrollbar-thumb {
+  background-color: #ccc; /* Customize scrollbar thumb color */
+  border-radius: 4px; /* Rounded scrollbar thumb */
+}
+
+.challengeTitleList::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa; /* Darker color on hover */
 }
 
 #userFace {
@@ -264,7 +289,7 @@ p {
   border-radius: 50%;
   background-color: #4f8cff; /* Use any color you like */
   animation: moveGradient 5s ease-in-out infinite alternate;
-  color: white;
+  color: rgb(226, 215, 215);
   font-size: 2rem;
   margin-bottom: 1rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);

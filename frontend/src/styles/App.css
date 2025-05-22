@@ -9,7 +9,7 @@
   border-radius: 15px;
   max-width: 600px;
   margin: 100px auto 40px auto;
-  font-family: baskerville;
+  font-family: Quicksand;
   gap: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -17,7 +17,6 @@
 #join h1 {
   font-size: 2rem;
   align-self: flex-start;
-  font-family: copperplate;
   margin-bottom: 20px;
 }
 
@@ -25,6 +24,7 @@
   font-size: 1.2rem;
   margin-bottom: 20px;
   align-self: flex-start;
+  font-family: Quicksand;
 }
 
 #join-btn {
@@ -35,7 +35,7 @@
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  font-family: copperplate;
+  font-family: Quicksand;
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -43,7 +43,7 @@
 }
 
 #join-btn::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: -100%;
@@ -66,17 +66,25 @@
 #mission {
   display: flex;
   flex-direction: column;
-  background-color: #f0f0f0;
+  background-color: whitesmoke;
   border-radius: 15px;
   width: 600px;
   margin: 40px auto;
   padding: 20px;
-  font-family: baskerville;
+  font-family: Quicksand;
+  z-index: 1;
+  transition: transform 0.6s ease, box-shadow 0.6s ease; /* Smooth transition for background and shadow */
+}
+
+#mission:hover {
+  /* Light blue background on hover */
+  transform: translateY(-5px); /* Optional lift effect */
+  box-shadow: 0 0 15px rgba(23, 84, 217, 0.833); /* Optional shadow effect */
 }
 
 #mission h2 {
   font-size: 1.75rem;
-  font-family: copperplate;
+  font-family: Quicksand;
   margin-bottom: 20px;
 }
 
@@ -89,16 +97,16 @@
 #home-challenges {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-content: center;
   justify-content: center;
   padding: 2rem;
 }
 
 #home-challenges h2 {
   align-self: flex-start; /* Aligns h2 to the left within the container */
-  margin-left: 8rem;
+  margin-left: 12.8rem;
   font-size: 2.5rem;
-  font-family: copperplate;
+  font-family: Quicksand;
 }
 
 .few-challenges h3 {
@@ -106,17 +114,17 @@
 }
 
 .few-challenges {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap; /* Makes it responsive on small screens */
-  gap: 1.5rem;
+  display: grid; /* Use CSS Grid */
+  grid-template-columns: repeat(2, 1fr); /* Create 2 columns of equal width */
+  grid-template-rows: repeat(2, auto); /* Create 2 rows with automatic height */
+  gap: 1.5rem; /* Add spacing between grid items */
   margin: 1rem auto;
   list-style: none;
   padding: 0;
   max-width: 900px;
-  font-family: baskerville;
+  font-family: Quicksand;
   font-weight: bold;
+  justify-content: center; /* Center the grid horizontally */
 }
 
 .few-challenges p {
@@ -129,27 +137,35 @@
   border-radius: 15px;
   width: 200px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.6s ease, box-shadow 0.4s ease;
 }
 
 .few-challenges li:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  transform: translateY(-10px);
+  box-shadow: 0 0 15px rgba(23, 84, 217, 0.833);
 }
 
 /* Challenge Page */
 .challengeDetails {
-  align-items: center;
-  padding: 2rem;
-  background-color: #f0f0f0;
-  width: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  /* align-items: center; */
+  align-items: space-between;
+  padding: 15px;
+  background-color: #e4d9d9;
+  width: 500px;
   margin: 0 auto;
+  border-radius: 15px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.229);
 }
 
 .challengeActions {
   display: flex;
   justify-content: space-evenly;
-  margin-top: 1rem;
+  margin-top: 3.5rem;
+  margin-bottom: 4.5px;
 }
 
 /* create challenge */
