@@ -156,13 +156,6 @@ function ChallengeInfo() {
   return (
     <>
       <h2>{challenge.title}</h2>
-      <p>Description: {challenge.description}</p>
-      <p>Start Date: {challenge.created_at}</p>
-      <p>End: {challenge.end_time}</p>
-
-      {/* <button onClick={handleJoin}>
-        {isJoined ? "Joined (Click to Unjoin)" : "Join"}
-      </button> */}
 
       <div className="challengeDetails">
         <p>
@@ -177,10 +170,16 @@ function ChallengeInfo() {
       </div>
       <div className="challengeActions">
         <Link to={"/challenges"}>
-          <button>Back to Challenges</button>
-        </Link>
         <Link to={`/challenges/${challenge.id}/posts`}>
           <button>Posts</button>
+        </Link>
+        <Link to={'/challenges'}>
+          <button>Back to Challenges</button>
+        </Link>
+        <Link>
+          <button onClick={handleJoin}>
+            {isJoined ? 'Joined (Click to Unjoin)' : 'Join'}
+          </button>
         </Link>
       </div>
 
