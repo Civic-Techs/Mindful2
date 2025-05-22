@@ -46,7 +46,8 @@ function ChallengesPage() {
         }}
       >
         {allChallengesData.map((challenge, index) => {
-          const randomColor = colors[Math.floor(Math.random() * colors.length)];
+          const colorIndex = challenge.id % colors.length;
+          const randomColor = colors[colorIndex];
           return (
             <Link
               to={`/challenges/${challenge.id}`}
