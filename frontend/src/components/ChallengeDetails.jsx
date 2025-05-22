@@ -1,28 +1,16 @@
-<<<<<<< HEAD
 import { getChallengeId } from "../adapters/challengesFetch";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import CurrentUserContext from "../contexts/current-user-context";
-// import { fetchHandler, getPostOptions } from '../utils/fetchingUtils';
-// import { addParticipant } from "../adapters/participants-adapter";
-import { getPostsByChallengeId, deletePost } from "../adapters/postsFetch";
-import { getCommentsByPostId, getAllComments } from "../adapters/commentsFetch"; // Import API functions
-import CommentsSection from "./CommentsSection"; // Import CommentsSection component
-=======
-import { getChallengeId } from '../adapters/challengesFetch';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import { useEffect, useState, useContext } from 'react';
-import CurrentUserContext from '../contexts/current-user-context';
-import { fetchHandler, getPostOptions } from '../utils/fetchingUtils';
+import { fetchHandler, getPostOptions } from "../utils/fetchingUtils";
 import {
   addParticipant,
   getParticipantById,
-} from '../adapters/participants-adapter';
-import { getPostsByChallengeId } from '../adapters/postsFetch';
-import { getCommentsByPostId, getAllComments } from '../adapters/commentsFetch'; // Import API functions
-import CommentsSection from './CommentsSection'; // Import CommentsSection component
-import { use } from 'react';
->>>>>>> main
+} from "../adapters/participants-adapter";
+import { getPostsByChallengeId, deletePost } from "../adapters/postsFetch";
+import { getCommentsByPostId, getAllComments } from "../adapters/commentsFetch"; // Import API functions
+import CommentsSection from "./CommentsSection"; // Import CommentsSection component
+import { use } from "react";
 
 function ChallengeInfo() {
   const { id } = useParams();
@@ -35,7 +23,7 @@ function ChallengeInfo() {
 
   const navigate = useNavigate();
   if (!currentUser) {
-    navigate('/login');
+    navigate("/login");
   }
 
   useEffect(() => {
@@ -44,13 +32,13 @@ function ChallengeInfo() {
         const [data, error] = await getChallengeId(id);
 
         if (error) {
-          console.error('Error fetching challenge:', error);
+          console.error("Error fetching challenge:", error);
           return;
         }
 
         setChallenge(data);
       } catch (error) {
-        console.error('Error fetching challenge:', error);
+        console.error("Error fetching challenge:", error);
       }
     };
     getChallengeInfo();
@@ -65,7 +53,7 @@ function ChallengeInfo() {
         );
         setIsJoined(isParticipant);
       } catch (error) {
-        console.error('Error checking participant:', error);
+        console.error("Error checking participant:", error);
       }
     };
     checkIfJoined();
@@ -79,7 +67,7 @@ function ChallengeInfo() {
       });
       setIsJoined(true);
     } catch (error) {
-      console.error('Error joining challenge:', error);
+      console.error("Error joining challenge:", error);
     }
   };
 
@@ -89,7 +77,7 @@ function ChallengeInfo() {
         const [data, error] = await getPostsByChallengeId(id);
 
         if (error) {
-          console.error('Error fetching posts:', error);
+          console.error("Error fetching posts:", error);
           return;
         }
         setPosts(data.posts);
@@ -102,7 +90,7 @@ function ChallengeInfo() {
         }
         setComments(commentsData);
       } catch (error) {
-        console.error('Error fetching posts:', error);
+        console.error("Error fetching posts:", error);
       }
     };
     herePosts();
@@ -113,7 +101,7 @@ function ChallengeInfo() {
       try {
         const [allComments, error] = await getAllComments();
         if (error) {
-          console.error('Error fetching all comments:', error);
+          console.error("Error fetching all comments:", error);
           return;
         }
 
@@ -127,7 +115,7 @@ function ChallengeInfo() {
 
         setComments(filteredComments);
       } catch (error) {
-        console.error('Error fetching all comments:', error);
+        console.error("Error fetching all comments:", error);
       }
     };
 
@@ -169,7 +157,7 @@ function ChallengeInfo() {
         <Link to={`/challenges/${challenge.id}/posts`}>
           <button>Posts</button>
         </Link>
-        <Link to={'/challenges'}>
+        <Link to={"/challenges"}>
           <button>Back to Challenges</button>
         </Link>
         <Link>
@@ -177,11 +165,11 @@ function ChallengeInfo() {
             onClick={handleJoin}
             disabled={isJoined} // Disable the button if the user is already a participant
             style={{
-              backgroundColor: isJoined ? 'grey' : '#007bff',
-              cursor: isJoined ? 'not-allowed' : 'pointer',
+              backgroundColor: isJoined ? "grey" : "#007bff",
+              cursor: isJoined ? "not-allowed" : "pointer",
             }}
           >
-            {isJoined ? 'Already Joined' : 'Join'}
+            {isJoined ? "Already Joined" : "Join"}
           </button>
         </Link>
       </div>
