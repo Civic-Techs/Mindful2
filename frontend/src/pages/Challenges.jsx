@@ -3,6 +3,16 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 // import CreateChallenge from "@/components/CreateChallenge";
 
+const colors = [
+  '#FF6B6B', // red
+  '#6BCB77', // green
+  '#4D96FF', // blue
+  '#FFC75F', // yellow
+  '#FF9671', // orange
+  '#A66DD4', // purple
+  '#00C9A7', // teal
+];
+
 function ChallengesPage() {
   const [allChallengesData, setAllChallengesData] = useState([]);
 
@@ -35,43 +45,47 @@ function ChallengesPage() {
           margin: '20px auto',
         }}
       >
-        {allChallengesData.map((challenge, index) => (
-          <Link
-            to={`/challenges/${challenge.id}`}
-            key={challenge.id}
-            style={{
-              textDecoration: 'none',
-              color: 'inherit',
-            }}
-          >
-            <div
+        {allChallengesData.map((challenge, index) => {
+          const colorIndex = challenge.id % colors.length;
+          const randomColor = colors[colorIndex];
+          return (
+            <Link
+              to={`/challenges/${challenge.id}`}
+              key={challenge.id}
               style={{
-                borderRadius: '12px',
-                overflow: 'hidden',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                height: '100%',
+                textDecoration: 'none',
+                color: 'inherit',
               }}
             >
               <div
                 style={{
-                  backgroundColor: 'red',
-                  height: '100px',
-                }}
-              />
-
-              <div
-                style={{
-                  padding: '12px',
-                  textAlign: 'center',
-                  backgroundColor: 'white',
-                  fontWeight: '500',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                  height: '100%',
                 }}
               >
-                {challenge.title}
+                <div
+                  style={{
+                    backgroundColor: randomColor,
+                    height: '100px',
+                  }}
+                />
+
+                <div
+                  style={{
+                    padding: '12px',
+                    textAlign: 'center',
+                    backgroundColor: 'white',
+                    fontWeight: '500',
+                  }}
+                >
+                  {challenge.title}
+                </div>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          );
+        })}
       </div>
       <Link to="/create-challenge">
         <button id="create-btn-container">Create Challenge!</button>
