@@ -6,6 +6,7 @@ import {
 } from "../adapters/commentsFetch";
 import CurrentUserContext from "../contexts/current-user-context";
 import { getUserById } from "../adapters/user-adapter"; // Import the function to get user by ID
+// import { useParams } from "react-router-dom";
 
 const CommentsSection = ({ postId }) => {
   const { currentUser } = useContext(CurrentUserContext);
@@ -79,9 +80,12 @@ const CommentsSection = ({ postId }) => {
     }
   };
 
-  const handleDeleteComment = async (commentId) => {
+  const handleDeleteComment = async (id) => {
     try {
-      const [response, error] = await deleteComment(commentId);
+      const [response, error] = await deleteComment(id);
+
+      console.log("Delete response:", response, id);
+
       if (error) {
         console.error("Error deleting comment:", error);
         return;
@@ -89,7 +93,7 @@ const CommentsSection = ({ postId }) => {
 
       // Remove the deleted comment from the state
       setComments((prevComments) =>
-        prevComments.filter((comment) => comment.id !== commentId)
+        prevComments.filter((comment) => comment.id !== id)
       );
     } catch (error) {
       console.error("Error deleting comment:", error);
@@ -104,9 +108,12 @@ const CommentsSection = ({ postId }) => {
           comments.map((comment, index) => (
             <li key={`${comment.id}-${index}`}>
               <strong>{`${comment.user?.username}`}</strong> {comment.content}
-              {currentUser?.id === comment.user_id && ( // Show delete button only for the comment owner
+              {currentUser?.id === comment.user_id && (
                 <button
-                  onClick={() => handleDeleteComment(comment.id)}
+                  onClick={() => {
+                    console.log("Clicked comment:", comment);
+                    handleDeleteComment(comment.id);
+                  }}
                   style={{ marginLeft: "10px", color: "red" }}
                 >
                   Delete

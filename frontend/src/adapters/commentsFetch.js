@@ -2,6 +2,7 @@ import {
   fetchHandler,
   getPostOptions,
   basicFetchOptions,
+  deleteOptions,
 } from "../utils/fetchingUtils";
 
 // Add a new comment
@@ -23,13 +24,16 @@ export const getAllComments = async () => {
   return await fetchHandler(url, basicFetchOptions);
 };
 
-export const deleteComment = async (commentId) => {
-  const url = `/api/comments/${commentId}`;
-  const options = {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  return await fetchHandler(url, options);
+export const deleteComment = async (id) => {
+  console.log("Deleting comment with ID:", id); // Debugging log
+
+  const url = `/api/comments/${id}`;
+  const [responseData, error] = await fetchHandler(url, deleteOptions);
+
+  // If the response body is empty, return a success message
+  if (!responseData && !error) {
+    return [{ success: true }, null];
+  }
+
+  return [responseData, error];
 };

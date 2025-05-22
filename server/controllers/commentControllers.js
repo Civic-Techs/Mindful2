@@ -163,6 +163,8 @@ exports.deleteComment = async (req, res) => {
   try {
     const { id } = req.params;
 
+    console.log("Deleting comment with ID:", id);
+
     const deletedComment = await Comment.delete({ id });
     if (!deletedComment) {
       return res.status(404).send({
