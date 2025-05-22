@@ -1,7 +1,8 @@
-const knex = require('../db/knex');
+const knex = require("../db/knex");
 
 class Comment {
-  constructor({ content, post_id, user_id, parent_comment_id }) {
+  constructor({ id, content, post_id, user_id, parent_comment_id }) {
+    this.id = id;
     this.content = content;
     this.post_id = post_id;
     this.user_id = user_id;
@@ -9,7 +10,7 @@ class Comment {
   }
 
   static async create({
-    content = '',
+    content = "",
     post_id,
     user_id,
     parent_comment_id = null,
@@ -89,10 +90,7 @@ class Comment {
   }
 
   static async deleteAll() {
-    return knex('comments').del();
-  }
-  static async deleteAll() {
-    return knex('comments').del();
+    return knex("comments").del();
   }
 }
 
