@@ -9,7 +9,7 @@
   border-radius: 15px;
   max-width: 600px;
   margin: 100px auto 40px auto;
-  font-family: Quicksand;
+  font-family: "inter", sans-serif;
   gap: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -24,7 +24,7 @@
   font-size: 1.2rem;
   margin-bottom: 20px;
   align-self: flex-start;
-  font-family: Quicksand;
+  font-family: "inter", sans-serif;
 }
 
 #join-btn {
@@ -35,7 +35,7 @@
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  font-family: Quicksand;
+  font-family: "merriweather", sans-serif;
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -43,7 +43,7 @@
 }
 
 #join-btn::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -56,7 +56,7 @@
 
 #create-btn-container {
   display: flex; /* Enable Flexbox */
-  justify-content: center; /* Center the button horizontally */
+  justify-content: flex-start; /* Center the button horizontally */
   align-items: center; /* Center the button vertically */
   margin: 1rem auto; /* Optional: Add some margin for spacing */
 }
@@ -78,7 +78,7 @@
   width: 600px;
   margin: 40px auto;
   padding: 20px;
-  font-family: Quicksand;
+  font-family: "merriweather", sans-serif;
   z-index: 1;
   transition: transform 0.6s ease, box-shadow 0.6s ease; /* Smooth transition for background and shadow */
 }
@@ -91,7 +91,7 @@
 
 #mission h2 {
   font-size: 1.75rem;
-  font-family: Quicksand;
+  font-family: "merriweather", sans-serif;
   margin-bottom: 20px;
 }
 
@@ -132,7 +132,7 @@
   list-style: none;
   padding: 0;
   max-width: 900px;
-  font-family: Quicksand;
+  font-family: "merriweather", sans-serif;
   font-weight: bold;
   justify-content: center; /* Center the grid horizontally */
 }
@@ -161,7 +161,6 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 1rem;
-  /* align-items: center; */
   align-items: space-between;
   padding: 15px;
   background-color: #e4d9d9;
@@ -273,4 +272,19 @@ textarea {
 .postItem img {
   max-width: 100%; /* Ensure images fit within the box */
   border-radius: 10px; /* Optional: Add rounded corners to images */
+}
+
+#post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 3rem; /* Add some space below the header */
+}
+
+#post-default {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 3rem;
 }
