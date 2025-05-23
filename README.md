@@ -1,11 +1,11 @@
 # Mindful Motion
 
-> Our goal is that this web app will allow for more teenagers to be more productive with their time
+> The goal of this web application is to provide youth an alternative to unproductive social media usage.
 
 ## Team
 
 - **Scrum Master**: **Catalina Dinozo**
-- **Development Team Members**: [Catalina Dinozo](https://github.com/csdinozo), [Tyron Odame](https://github.com/TyronOdame), [Issac Bien-Aime](https://github.com/Issactly), [Ajene Christian](https://github.com/ajenec)
+- **Development Team Members**: [Tyron Odame](https://github.com/TyronOdame), [Ajene Christian](https://github.com/ajenec), [Catalina Dinozo](https://github.com/csdinozo), [Issac Bien-Aime](https://github.com/Issactly)
 
 ## Table of Contents
 
@@ -60,12 +60,17 @@ cd server && npm start
 
 ## Technologies Used
 
+- JavaScript
+- HTML5
+- CSS3
 - Node
 - Express
-- Postgresql
+- PostgreSQL
 - React
 - Knex
-- etc...
+- TablePlus
+- Chakra UI
+- Cloudinary
 
 ## Project Proposal
 
