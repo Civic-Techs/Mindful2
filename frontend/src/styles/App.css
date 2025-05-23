@@ -194,5 +194,83 @@ textarea {
   background: whitesmoke;
 }
 
-.create-btn {
+.deleteButton {
+  padding: 0.25rem 0.5rem; /* Smaller padding for a compact size */
+  font-size: 0.8rem; /* Smaller font size */
+  background-color: #ff4d4d74; /* Red background for delete */
+  color: white; /* White text */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.deleteButton:hover {
+  background-color: #cc0000; /* Darker red on hover */
+}
+
+.commentBox {
+  width: 100%; /* Adjust width as needed */
+  max-width: 300px; /* Set a maximum width */
+  height: 50px; /* Set the height of the text box */
+  padding: 0.5rem; /* Add padding inside the text box */
+  border: 1px solid #ccc; /* Add a light border */
+  border-radius: 5px; /* Add rounded corners */
+  font-size: 0.9rem; /* Adjust font size */
+  resize: none; /* Disable resizing */
+}
+
+.comments-section ul {
+  max-height: 200px; /* Set a fixed height for the comments list */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 0.5rem; /* Add some padding for better spacing */
+  margin: 0; /* Remove default margin */
+  list-style: none; /* Remove default list styling */
+
+  border-radius: 5px; /* Optional: Add rounded corners */
+  background-color: #f9f9f9; /* Optional: Light background for the comments list */
+}
+
+.comments-section ul::-webkit-scrollbar {
+  width: 8px; /* Customize scrollbar width */
+}
+
+.comments-section ul::-webkit-scrollbar-thumb {
+  background-color: #ccc; /* Customize scrollbar thumb color */
+  border-radius: 4px; /* Rounded scrollbar thumb */
+}
+
+.comments-section ul::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa; /* Darker color on hover */
+}
+
+.postsList {
+  display: flex; /* Use Flexbox to display items horizontally */
+  flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
+  justify-content: center; /* Center the list items horizontally */
+  gap: 1.5rem; /* Add spacing between the list items */
+  padding: 2rem;
+  list-style: none; /* Remove default list styling */
+}
+
+.postItem {
+  background: #fff; /* White background for the box */
+  border: 2px solid #eee; /* Light border around the box */
+  border-radius: 15px; /* Rounded corners */
+  padding: 1rem; /* Add padding inside the box */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for a nice effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  width: 250px; /* Set a fixed width for each box */
+  text-align: center; /* Center-align the text inside the box */
+  gap: 5px;
+}
+
+.postItem:hover {
+  transform: translateY(-5px); /* Slight lift effect on hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.postItem img {
+  max-width: 100%; /* Ensure images fit within the box */
+  border-radius: 10px; /* Optional: Add rounded corners to images */
 }
